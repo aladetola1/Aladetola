@@ -1,4 +1,3 @@
-
 import numpy as np
 import time
 
@@ -11,7 +10,6 @@ INVALID_POSE_FITNESS = -1000000.0
 INVALID_POSE_BEHAVIOR = [0., 0., 0., 0., 0., 0.]
 INVALID_6DOF_INIT_POSE =((0., 0., 0.),( 0., 0., 0.))
 INVALID_6DOF_FINAL_POSE = ((0., 0., 0.),( 0., 0., 0.))
-
 
 def evaluate_placement_routine(individual, env, eval_kwargs):
 
@@ -32,6 +30,7 @@ def evaluate_placement_routine(individual, env, eval_kwargs):
 
     return behavior, fitness, infos
 
+
 def evaluate_placement(individual, env, eval_kwargs):
 
     obj_6dof_init_pose = cvt_genome_to_6dof_obj_pose(individual=individual, env=env, eval_kwargs=eval_kwargs)
@@ -40,7 +39,6 @@ def evaluate_placement(individual, env, eval_kwargs):
         return invalid_6dof_pose_evaluation_outcome()
     
     env.reset()
-
     eval_6dof_pose_kwargs = {
         'env': env,
         'obj_6dof_pose': obj_6dof_init_pose,
@@ -51,7 +49,6 @@ def evaluate_placement(individual, env, eval_kwargs):
     if env.is_debug_mode():
         time.sleep(2)
         env.delete_debug_bodies()
-
 
     is_stable = object_output_data['is_stable']
     is_valid = object_output_data['is_valid']
@@ -66,25 +63,28 @@ def evaluate_placement(individual, env, eval_kwargs):
     fitness = get_fitness(obj_trajectory_data)
 
     obj_6dof_final_pose = obj_trajectory_data[-1]
-        
+    grasp_proxy = get_grasp_proxy(obj_6dof_final_pose)
+
     final_pose_dict = {
         'xyz': list(obj_6dof_final_pose[0]),
         'euler_rpy': list(obj_6dof_final_pose[1]),
         'quaternions': None
     }
 
+
     infos = {
         'init_6dof_pose': obj_6dof_init_pose,
         'final_6dof_pose': final_pose_dict,
         'is_success': float(is_success),
         'is_valid': float(is_valid),
+        'grasp_proxy': float(grasp_proxy),
     }
 
     xyz_final_pos = final_pose_dict['xyz']
     euler_final_rpy = final_pose_dict['euler_rpy']
     behavior = xyz_final_pos + euler_final_rpy
-
     return behavior, fitness, infos
+
 
 def get_fitness(obj_trajectory_data):
 
@@ -105,6 +105,37 @@ def get_fitness(obj_trajectory_data):
 
     return fitness
 
+
+def get_grasp_proxy(obj_6dof_final_pose):
+    """
+    Grasp accessibility proxy.
+    Higher = easier top-down grasp.
+    """
+
+    xyz = np.array(obj_6dof_final_pose[0])
+    rpy = np.array(obj_6dof_final_pose[1])
+
+    roll, pitch, yaw = rpy
+
+    height_score = xyz[2]
+
+    # Distance from table center
+    center_distance = np.linalg.norm(xyz[:2])
+
+    # Uprightness 
+    tilt = np.sqrt(roll**2 + pitch**2)
+
+    # Bounded scores
+    center_score = np.exp(-center_distance / 0.1)
+    upright_score = np.exp(-tilt)
+
+    grasp_proxy = (
+        0.5 * height_score +
+        0.3 * center_score +
+        0.2 * upright_score
+    )
+
+    return grasp_proxy
 
 def cvt_genome_to_6dof_obj_pose(individual, env, eval_kwargs):
     search_representation = eval_kwargs['search_representation']

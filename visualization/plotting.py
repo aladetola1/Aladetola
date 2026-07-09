@@ -13,6 +13,8 @@ import utils.common_tools as uct
 from pathlib import Path
 import numpy as np
 
+def _safe_1d(x):
+    return np.asarray(x).squeeze()
 
 TIME_LABEL2VIS_STR = {
         'n_evals_hist': 'number of rollouts',
@@ -97,7 +99,11 @@ def plot_outcome_archive_coverage(data_dict, time_label='n_evals_hist', title=''
                        'output archive coverage': outcome_archive_cvg_hist})
 
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(x=time_label_vis_str, y='output archive coverage', data=df, ax=ax)
+    ax.plot(
+    	np.asarray(time_hist).ravel(),
+    	np.asarray(outcome_archive_cvg_hist).ravel(),
+    	linewidth=2
+    )
 
     title_str = title
     plt.suptitle(title_str)
@@ -126,7 +132,11 @@ def plot_success_archive_coverage(data_dict, time_label='n_evals_hist', title=''
                        'success archive coverage': success_archive_cvg_hist})
 
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(x=time_label_vis_str, y='success archive coverage', data=df, ax=ax)
+    ax.plot(
+    	df[time_label_vis_str].to_numpy().ravel(),
+    	df['success archive coverage'].to_numpy().ravel(),
+    	linewidth=2
+    )
 
     title_str = title
     plt.suptitle(title_str)
@@ -160,7 +170,11 @@ def plot_qd_score_over_evals(data_dict, title='', export_path=None):
     # create data frame for the plot
     df = pd.DataFrame(qd_score_per_gen)
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(data=df, x='Evaluation', y='QD Score', ax=ax)
+    ax.plot(
+    	df['Evaluation'].to_numpy(dtype=np.float64).ravel(),
+    	df['QD Score'].to_numpy(dtype=np.float64).ravel(),
+    	linewidth=2
+    )
 
     plt.xlabel("Evaluation")
     plt.ylabel("QD Score")
@@ -190,7 +204,11 @@ def plot_fitness_mean_over_evals(data_dict, title='', export_path=None):
     df = pd.DataFrame(mean_fitness_per_gen)
 
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(data=df, x='Evaluation', y='Mean Fitness', ax=ax)
+    ax.plot(
+    	df['Evaluation'].to_numpy(dtype=np.float64).ravel(),
+    	df['Mean Fitness'].to_numpy(dtype=np.float64).ravel(),
+    	linewidth=2
+    )
 
     plt.xlabel("Evaluation")
     plt.ylabel("mean Fitness")
@@ -220,7 +238,11 @@ def plot_max_fitness_over_evals(data_dict, title='', export_path=None):
 
     # Création du plot
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(data=df, x='Evaluation', y='Max Fitness', ax=ax)
+    ax.plot(
+    	df['Evaluation'].to_numpy().ravel(),
+    	df['Max Fitness'].to_numpy().ravel(),
+    	linewidth=2
+    )
 
     plt.xlabel("Evaluation")
     plt.ylabel("Max Fitness value")
@@ -250,7 +272,11 @@ def plot_fitness(data_dict, title='', export_path=None, shift=False):
     df = pd.DataFrame({'Fitness (sorted)': last_fitness, 'Index': range(len(last_fitness))})
 
     fig, ax = plt.subplots(1, 1, figsize=(12, 12))
-    sns.lineplot(data=df, x='Index', y='Fitness (sorted)', ax=ax)
+    ax.plot(
+    	df['Index'].to_numpy().ravel(),
+    	df['Fitness (sorted)'].to_numpy().ravel(),
+    	linewidth=2
+    )
 
     plt.xlabel("Individuals ranked")
     plt.ylabel("Fitness value")
@@ -282,7 +308,11 @@ def plot_success_archive_qd_score(details_dict, data_dict, time_label='n_evals_h
                        'success archive qd score': success_archive_qd_score_hist})
 
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(x=time_label_vis_str, y='success archive qd score', data=df, ax=ax)
+    ax.plot(
+    	df[time_label_vis_str].to_numpy().ravel(),
+    	df['success archive qd score'].to_numpy().ravel(),
+    	linewidth=2
+    )
 
     title_str = title
     plt.suptitle(title_str)
@@ -311,7 +341,11 @@ def plot_n_successful_cells(details_dict, data_dict, time_label='n_evals_hist', 
                        'number of successful cells': n_successful_cells_list})
 
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
-    sns.lineplot(x=time_label_vis_str, y='number of successful cells', data=df, ax=ax)
+    ax.plot(
+    	df[time_label_vis_str].to_numpy().ravel(),
+    	df['number of successful cells'].to_numpy().ravel(),
+    	linewidth=2
+    )
 
     title_str = title
     plt.suptitle(title_str)

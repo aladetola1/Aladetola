@@ -1,6 +1,30 @@
 /runs
+/runs_sim2real
 /qd_grasp_6dof.egg-info
 /__pycache__
 /qdp
-/runs_sim2real
- 
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Temporary files
+/tmp
+tmp/
+
+# Generated results
+/results
+/robustness_eval
+*.npz
+*.csv
+*.log
+
+# Backup files
+*.save
+*_backup.py
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
