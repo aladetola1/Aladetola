@@ -37,17 +37,17 @@ Then run one of the following examples:
 
 Display mode, to visualize each evaluation in a sequential run: 
 ```
-python3 run_qd_place.py -a cma_mae -nbr 2000 -p 500 -o ycb_mug -t table -ii -d
+python3 run_qd_place.py -a cma_mae -nbr 2000 -p 20 -o ycb_mug -t table -ii -d
 ```
 
 Longer run with parallelization:
 ```
-python3 run_qd_place.py -a cma_mae -nbr 2000 -p 500 -o ycb_mug -t table -ii -ll
+python3 run_qd_place.py -a cma_mae -nbr 2000 -p 20 -o ycb_mug -t table -ii -ll
 ```
 
 Run with different z initial positions:
 ```
-python3 run_qd_place.py -a cma_mae -nbr 2000 -p 500 -o ycb_mug -t table -ii -ll -n 3
+python3 run_qd_place.py -a cma_mae -nbr 2000 -p 20 -o ycb_mug -t table -ii -ll -n 3
 ```
 
 
@@ -61,7 +61,7 @@ python3 visualization/replay_poses.py -r path_to_run_folder/
 Shuffle places and replay poses from a completed run:
 ```
 python3 visualization/replay_poses.py -r path_to_run_folder/ -si
-```
+
 
 
 
