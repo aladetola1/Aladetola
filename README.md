@@ -1,3 +1,30 @@
+# PlaceIt+: Manipulation-Aware Object Placement using RGMP
+
+This repository extends the original **PlaceIt** framework by introducing the **Robot-independent Geometric Manipulation Proxy (RGMP)** for evaluating and ranking stable object placements according to their predicted grasp friendliness.
+
+---
+
+## 🎥 Demonstration
+
+<p align="center">
+  <img src="demo/top10_demo.gif" width="700">
+</p>
+
+### Top-10 RGMP/GFI Object Placements
+- 📹 Full-resolution video: [mug_top10_gfi.mp4](demo/mug_top10_gfi.mp4)
+
+### Concept Robot Integration
+- 📹 Full-resolution video: [concept_robot_grasp_demo.mp4](demo/concept_robot_grasp_demo.mp4)
+
+> **Note:** The concept robot animation is an illustrative visualization of the proposed PlaceIt → RGMP → robotic manipulation workflow. It demonstrates the intended downstream integration and is **not** presented as a completed hardware experiment.
+
+---
+
+## Installation
+
+
+
+
 # Placeit!
 
 ## Before starting
