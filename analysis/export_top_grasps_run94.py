@@ -12,7 +12,6 @@ grasp_scores = np.array(
     [x["grasp_proxy"] for x in infos]
 )
 
-# Highest grasp first
 order = np.argsort(grasp_scores)[::-1]
 
 TOP_N = 10

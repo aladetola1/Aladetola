@@ -30,7 +30,7 @@ def plot_fitness_comparison(df, export_path=None):
 
     plt.figure(figsize=(12, 12))
     palette = sns.color_palette("tab10")
-    sns.lineplot(data=df, x='individual', y='fitness', hue='learning_rate', palette=palette, estimator=None) # marker='o'
+    sns.lineplot(data=df, x='individual', y='fitness', hue='learning_rate', palette=palette, estimator=None) 
 
     plt.title("Comparaison des distributions de fitness")
     plt.xlabel("Individu (rang)")
@@ -52,7 +52,7 @@ def plot_qd_score_comparaison(df, export_path=None):
        
     plt.figure(figsize=(12, 12))
     palette = sns.color_palette("tab10")
-    sns.lineplot(data=df, x='Evaluation', y='QD Score', hue='learning_rate', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='QD Score', hue='learning_rate', palette=palette) 
 
     plt.title("Comparaison des distributions de qd_sore")
     plt.xlabel("Evaluation")
@@ -74,7 +74,7 @@ def plot_outcome_cvg_comparaison(df, export_path=None):
         
     plt.figure(figsize=(12, 12))
     palette = sns.color_palette("tab10")
-    sns.lineplot(data=df, x='Evaluation', y='outcome_cvg', hue='learning_rate', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='outcome_cvg', hue='learning_rate', palette=palette) 
 
     plt.title("Comparaison des distributions de outcome_cvg")
     plt.xlabel("Individu (rang)")

@@ -12,7 +12,6 @@ grasp_scores = np.array(
     [x["grasp_proxy"] for x in infos]
 )
 
-# Sort by grasp accessibility (highest first)
 order = np.argsort(grasp_scores)[::-1]
 
 TOP_N = 10
@@ -28,8 +27,6 @@ for rank, idx in enumerate(order[:TOP_N], start=1):
     print("Final pose:")
     print(infos[idx]["final_6dof_pose"])
 
-
-# Save top 10 candidates
 top_infos = []
 
 for idx in order[:TOP_N]:

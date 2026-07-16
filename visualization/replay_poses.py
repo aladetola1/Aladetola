@@ -51,15 +51,13 @@ def replay_6dof_specific_pose(env, all_6dof_pose_data, display_flags):
 
 	i_ind2display = display_flags['i_ind2display']
 
-	# sort data
+	
 	all_ids = list(all_6dof_pose_data.keys())
 	all_fits = [all_6dof_pose_data[ind_id]['fitness'] for ind_id in all_ids]
 	ind_ids_sorted_ascending_order = np.argsort(all_fits)[::-1]
 	all_all_6dof_pose_ids = [all_ids[i] for i in ind_ids_sorted_ascending_order]
 	
-	# get specific pose
 	ind_id = all_all_6dof_pose_ids[i_ind2display]
-	#ind_id = 233
 	obj_6dof_pose = all_6dof_pose_data[ind_id]['6dof_pose']
 	fitness = all_6dof_pose_data[ind_id]['fitness']
 	print(fitness)
@@ -93,7 +91,6 @@ def replay_all_6dof_poses(env, all_6dof_pose_data, display_flags):
 		ind_ids_sorted_descending_order = np.argsort(all_fits)[::-1]
 		all_all_6dof_pose_ids = [all_ids[i] for i in ind_ids_sorted_descending_order]
 		ind_ids_sorted_ascending_order = np.argsort(all_fits)
-		#all_all_6dof_pose_ids = [all_ids[i] for i in ind_ids_sorted_ascending_order]
 
 	for scs_ind_id in all_all_6dof_pose_ids:
 
@@ -144,7 +141,7 @@ def get_all_6dof_data(folder, cfg, display_flags):
 		is_robust_pose_flag = load_all_flags(folder)
 		for scs_ind_id, (ind, poses) in enumerate(zip(individuals, all_6dof_poses)):
 			if not is_robust_pose_flag[scs_ind_id]:
-				continue  # ignorer cet individu non stable
+				continue  
 
 			all_6dof_pose_data[scs_ind_id] = {
 				'6dof_pose': poses,
@@ -163,18 +160,15 @@ def get_all_6dof_data(folder, cfg, display_flags):
 
 
 def init_replay_6dof_poses(run_folder_path, display_flags, display=True):
-	# Load run folder
+	
 	folder = get_folder_path_from_str(run_folder_path)
 
-	# Extract corresponding data
 	run_details, run_infos, cfg = load_run_output_files(folder)
 
-	# Init grasp gym env
 	env = init_env(cfg, display=display)
 	
 	
 
-	# Get the 6dof data to replay
 	all_6dof_pose_data = get_all_6dof_data(folder=folder, cfg=cfg, display_flags=display_flags)
 
 	return env, all_6dof_pose_data, display_flags

@@ -39,7 +39,7 @@ def arg_parse_dump_path():
     if dump_path is None:
         raise AttributeError('Unset dump_path. (Call as : plotting.py --dump-path [path]')
 
-    # Makes sure the dump path follows the right pattern
+   
     dump_path = dump_path if dump_path[-1] != '/' else dump_path[:-1]
 
     return dump_path
@@ -64,7 +64,7 @@ def load_run_info(dump_path):
     run_name2load = dump_path
     run_info_path = run_name2load + '/run_infos.yaml'
 
-    # Open the file and load the file
+   
     with open(run_info_path) as f:
         run_info_data = yaml.load(f, Loader=SafeLoader)
 
@@ -156,7 +156,7 @@ def plot_qd_score_over_evals(data_dict, title='', export_path=None):
     fitness_hist = data_dict['fitness_hist']
     evals_hist = data_dict['n_evals_hist']
 
-    # shift fitness to positive values
+   
     all_fitness_values = [val for fitness_list in fitness_hist for val in fitness_list]
     min_val = min(all_fitness_values)
     shift_value = -min_val if min_val < 0 else 0
@@ -167,7 +167,7 @@ def plot_qd_score_over_evals(data_dict, title='', export_path=None):
         qd_score = np.sum(shifted_fitness)
         qd_score_per_gen.append({'Evaluation': evals_hist[i], 'QD Score': qd_score})
 
-    # create data frame for the plot
+   
     df = pd.DataFrame(qd_score_per_gen)
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
     ax.plot(
@@ -236,7 +236,6 @@ def plot_max_fitness_over_evals(data_dict, title='', export_path=None):
 
     df = pd.DataFrame(max_fitness_per_gen)
 
-    # Création du plot
     fig, ax = plt.subplots(1, 1, figsize=(18, 6))
     ax.plot(
     	df['Evaluation'].to_numpy().ravel(),
@@ -363,7 +362,7 @@ def plot_n_successful_cells(details_dict, data_dict, time_label='n_evals_hist', 
 
 def plot_export_routine(dump_path, details_dict, data_dict):
 
-    # Dump path sanity checks
+   
     if not uct.is_export_path_type_valid(dump_path, attempted_export_str='plots'):
         return
 
@@ -372,11 +371,11 @@ def plot_export_routine(dump_path, details_dict, data_dict):
     export_path_safe_create(export_path)
 
 
-    # Number of evaluations
+    
     plot_outcome_archive_coverage(data_dict, time_label='n_evals_hist', export_path=export_path,
                                   title='outcome archive coverage over n evals')
 
-    # Running time (in sec)
+    
     plot_success_archive_coverage(data_dict, time_label='n_evals_hist', export_path=export_path,
                                   title='success archive coverage over n evals')
     
@@ -390,11 +389,6 @@ def plot_export_routine(dump_path, details_dict, data_dict):
     plot_n_successful_cells(details_dict, data_dict,  time_label='n_evals_hist', export_path=export_path,
                                   title='number of successful cells over n evals')
 
-    # plot_max_fitness_over_evals(data_dict, export_path=export_path,
-    #                               title='max scs fitness over evals')
-    
-    # plot_fitness_mean_over_evals(data_dict, export_path=export_path,
-    #                              title='scs fitness mean over n evals')
     
     plt.close('all')
 

@@ -3,11 +3,6 @@ import numpy as np
 import environments.src.env_constants as env_consts
 
 
-# -------------------------------------------------------------------------------------------------------------------- #
-# INFO KEYS
-# -------------------------------------------------------------------------------------------------------------------- #
-
-
 INFO_KEYS = ['init_6dof_pose', 'final_6dof_pose', 'is_success', 'is_valid']
 
 INFO_LEN = len(INFO_KEYS)
@@ -18,45 +13,25 @@ IS_SUCCESS_KEY_ID = 2
 IS_VALID_KEY_ID = 3
 
 
-# -------------------------------------------------------------------------------------------------------------------- #
-# ORIENTATION LIMITS
-# -------------------------------------------------------------------------------------------------------------------- #
-
 BOUND_EULER_ORIENT_MIN = 0
 BOUND_EULER_ORIENT_MAX = 2*np.pi
 FIXED_INTERVAL_EULER = [BOUND_EULER_ORIENT_MIN, BOUND_EULER_ORIENT_MAX]
 
-# BOUND_EULER_ORIENT = np.pi
-# FIXED_INTERVAL_EULER = [-BOUND_EULER_ORIENT, BOUND_EULER_ORIENT]
-
-# -------------------------------------------------------------------------------------------------------------------- #
-# BULLET CONSTANTS
-# -------------------------------------------------------------------------------------------------------------------- #
 
 # Visualization
-BULLET_DEFAULT_DISPLAY_FLG = False  # whether to display steps
+BULLET_DEFAULT_DISPLAY_FLG = False  
 
 # Frictions
 LATERAL_FRICTION_OBJ_DEFAULT_VALUE = 0.5
 ROLLING_FRICTION_OBJ_DEFAULT_VALUE = 0.0001
 SPINNING_FRICTION_OBJ_DEFAULT_VALUE = 0.0001
 
-
-# -------------------------------------------------------------------------------------------------------------------- #
-# OBJECT LOAD MODE
-# -------------------------------------------------------------------------------------------------------------------- #
-
 LOAD_OBJECT_WITH_FIXED_BASE = False
 
-
-# -------------------------------------------------------------------------------------------------------------------- #
-# DOMAIN RANDOMIZATION BASED FITNESS
-# -------------------------------------------------------------------------------------------------------------------- #
-
 MIN_DOMAIN_RANDOMIZATION_FITNESS_VALUE = 0.
-DOMAIN_RANDOMIZATION_N_NOISY_TRIALS = 20 #100
+DOMAIN_RANDOMIZATION_N_NOISY_TRIALS = 20 
 
-DOMAIN_RANDOMIZATION_OBJECT_POS_VARIANCE_IN_M = 0.005 #0.005
+DOMAIN_RANDOMIZATION_OBJECT_POS_VARIANCE_IN_M = 0.005 
 DOMAIN_RANDOMIZATION_OBJECT_ORIENT_EULER_VARIANCE_IN_DEG = 15.
 DOMAIN_RANDOMIZATION_OBJECT_ORIENT_EULER_VARIANCE_IN_RAD = \
     DOMAIN_RANDOMIZATION_OBJECT_ORIENT_EULER_VARIANCE_IN_DEG * np.pi / 180
@@ -65,11 +40,6 @@ DOMAIN_RANDOMIZATION_ROLLING_FRICTION_MIN_VALUE = 0.01
 DOMAIN_RANDOMIZATION_ROLLING_FRICTION_MAX_VALUE = 0.04
 DOMAIN_RANDOMIZATION_SPINNING_FRICTION_MIN_VALUE = 0.1
 DOMAIN_RANDOMIZATION_SPINNING_FRICTION_MAX_VALUE = 0.4
-
-
-# -------------------------------------------------------------------------------------------------------------------- #
-# METHODS LIMITATIONS PER ROBOTS
-# -------------------------------------------------------------------------------------------------------------------- #
 
 SUPPORTED_ROBOTS_FOR_ANTIPODAL_BASED_METHODS = [env_consts.SimulatedRobot.PANDA_2_FINGERS]
 

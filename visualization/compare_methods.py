@@ -49,7 +49,7 @@ def plot_fitness_comparison(df, export_path=None) :
 
     plt.figure(figsize=(12, 12))
     palette = get_color_palette()
-    sns.lineplot(data=df, x='individual', y='fitness', hue='algorithm', palette=palette, estimator=None) # marker='o'
+    sns.lineplot(data=df, x='individual', y='fitness', hue='algorithm', palette=palette, estimator=None) 
 
     plt.title("Comparaison des distributions de fitness du success archive")
     plt.xlabel("Individu (rang)")
@@ -71,7 +71,7 @@ def plot_qd_scs_score_comparaison(df, export_path=None):
        
     plt.figure(figsize=(12, 12))
     palette = get_color_palette()
-    sns.lineplot(data=df, x='Evaluation', y='qd_scs', hue='algorithm', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='qd_scs', hue='algorithm', palette=palette) 
 
     plt.title("Comparaison of QD Score of success archive")
     plt.xlabel("Evaluation")
@@ -93,7 +93,7 @@ def plot_outcome_cvg_comparaison(df, export_path=None):
         
     plt.figure(figsize=(12, 12))
     palette = get_color_palette()
-    sns.lineplot(data=df, x='Evaluation', y='outcome_cvg', hue='algorithm', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='outcome_cvg', hue='algorithm', palette=palette) 
 
     plt.title("Comparaison of outcome archive couverage")
     plt.xlabel("Evaluations")
@@ -115,7 +115,7 @@ def plot_scs_cvg_comparaison(df, export_path=None):
         
     plt.figure(figsize=(12, 12))
     palette = get_color_palette()
-    sns.lineplot(data=df, x='Evaluation', y='scs_cvg', hue='algorithm', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='scs_cvg', hue='algorithm', palette=palette) 
 
     plt.title("Comparaison of success archive couverage")
     plt.xlabel("Evaluations")
@@ -137,7 +137,7 @@ def plot_scs_cells_comparaison(df, export_path=None):
         
     plt.figure(figsize=(12, 12))
     palette = get_color_palette()
-    sns.lineplot(data=df, x='Evaluation', y='scs_cell', hue='algorithm', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='scs_cell', hue='algorithm', palette=palette) 
 
     plt.title("Comparaison of the number of successful cells")
     plt.xlabel("Evaluations")
@@ -159,7 +159,7 @@ def plot_nbr_ivalid_inds_comparaison(df, export_path=None):
         
     plt.figure(figsize=(12, 12))
     palette = get_color_palette()
-    sns.lineplot(data=df, x='Evaluation', y='nbr_invalid_inds', hue='algorithm', palette=palette) # marker='o'
+    sns.lineplot(data=df, x='Evaluation', y='nbr_invalid_inds', hue='algorithm', palette=palette) 
 
     plt.title("Comparison of number of invalid individuals per evaluation")
     plt.xlabel("Evaluations")
@@ -181,7 +181,7 @@ def plot_nbr_eq_stable_cells_comparaison(df, export_path=None):
         
     plt.figure(figsize=(8, 5))
     palette = get_color_palette()
-    sns.barplot(data=df, x='algorithm', y='nbr', hue='algorithm', palette=palette) # marker='o'
+    sns.barplot(data=df, x='algorithm', y='nbr', hue='algorithm', palette=palette) 
 
     plt.title("Comparison of the number of stably balanced cells")
     plt.xlabel("Algorithm")
@@ -204,7 +204,7 @@ def plot_ratio_eq_stable_cells_comparaison(df, export_path=None):
         
     plt.figure(figsize=(8, 5))
     palette = get_color_palette()
-    sns.barplot(data=df, x='algorithm', y='ratio', hue='algorithm', palette=palette) # marker='o'
+    sns.barplot(data=df, x='algorithm', y='ratio', hue='algorithm', palette=palette)
 
     plt.title("Comparison of Stable Equilibrium Ratios on all successful cells")
     plt.xlabel("Algorithm")
@@ -227,7 +227,7 @@ def plot_final_poses_variance_comparaison(df, export_path=None):
         
     plt.figure(figsize=(8, 5))
     palette = get_color_palette()
-    sns.barplot(data=df, x='algorithm', y='variance', hue='algorithm', palette=palette) # marker='o'
+    sns.barplot(data=df, x='algorithm', y='variance', hue='algorithm', palette=palette) 
 
     plt.title("Comparison of final position variances")
     plt.xlabel("Algorithm")
@@ -250,7 +250,7 @@ def plot_init_poses_variance_comparaison(df, export_path=None):
         
     plt.figure(figsize=(8, 5))
     palette = get_color_palette()
-    sns.barplot(data=df, x='algorithm', y='variance', hue='algorithm', palette=palette) # marker='o'
+    sns.barplot(data=df, x='algorithm', y='variance', hue='algorithm', palette=palette) 
 
     plt.title("Comparison of initial position variances")
     plt.xlabel("Algorithm")
@@ -431,7 +431,6 @@ def get_final_poses_variance(data_dict,algo_name):
     positions = np.array(positions)
     orientations = np.array(orientations)
 
-    # Calcul de la variance
     pos_variance = np.var(positions)
     orient_variance = np.var(orientations)
 
@@ -453,7 +452,6 @@ def get_init_poses_variance(data_dict,algo_name):
     positions = np.array(positions)
     orientations = np.array(orientations)
 
-    # Calcul de la variance
     pos_variance = np.var(positions)
     orient_variance = np.var(orientations)
 
@@ -589,14 +587,6 @@ def main():
     else:
         print(f"No data found in scs_cells_list")
 
-    # if nbr_eq_stable_cells_list:
-    #     nbr_eq_stable_cells_list_df = pd.DataFrame(nbr_eq_stable_cells_list)
-
-    #     output_dir = os.path.join(args.dump_path, "plots")
-    #     os.makedirs(output_dir, exist_ok=True)
-    #     plot_nbr_eq_stable_cells_comparaison(nbr_eq_stable_cells_list_df, output_dir)
-    # else:
-    #     print(f"No data found in scs_cells_list")
 
     if final_poses_variances_list:
         final_poses_variances_list_df = pd.DataFrame(final_poses_variances_list)
@@ -616,14 +606,6 @@ def main():
     else:
         print(f"No data found in scs_cells_list")
 
-    # if ratio_eq_stable_cells_list:
-    #     ratio_eq_stable_cells_list_df = pd.DataFrame(ratio_eq_stable_cells_list)
-
-    #     output_dir = os.path.join(args.dump_path, "plots")
-    #     os.makedirs(output_dir, exist_ok=True)
-    #     plot_ratio_eq_stable_cells_comparaison(ratio_eq_stable_cells_list_df, output_dir)
-    # else:
-    #     print(f"No data found in scs_cells_list")
 
     if nbr_invalid_inds_list:
         nbr_invalid_inds_list_df = pd.DataFrame(nbr_invalid_inds_list)

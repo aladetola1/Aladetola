@@ -167,7 +167,7 @@ def get_all_6dof_poses_from_infos(infos):
         init_pose =row['init_6dof_pose']
         pos = init_pose['xyz']
         rpy = init_pose['euler_rpy']
-        full_pose = pos + rpy  # concaténer les deux listes
+        full_pose = pos + rpy  
         poses.append(full_pose)
 
     all_6dof_poses = np.array(poses)
@@ -180,7 +180,7 @@ def get_final_6dof_pose_from_infos(infos):
         init_pose =row['final_6dof_pose']
         pos = init_pose['xyz']
         rpy = init_pose['euler_rpy']
-        full_pose = pos + rpy  # concaténer les deux listes
+        full_pose = pos + rpy  
         poses.append(full_pose)
 
     all_6dof_poses = np.array(poses)

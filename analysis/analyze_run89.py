@@ -22,14 +22,12 @@ print("min grasp:", grasp_scores.min())
 print("mean grasp:", grasp_scores.mean())
 
 
-# Best graspable placement
 best_grasp = np.argmax(grasp_scores)
 
 print("\nBest grasp:")
 print(infos[best_grasp])
 
 
-# Best fitness placement
 best_fit = np.argmax(fitnesses)
 
 print("\nBest fitness:")
@@ -38,8 +36,6 @@ print(infos[best_fit])
 print("fitness:", fitnesses[best_fit])
 print("grasp:", grasp_scores[best_fit])
 
-
-# Top 10 grasp candidates
 order = np.argsort(grasp_scores)[::-1]
 
 TOP_N = 10
@@ -55,8 +51,6 @@ for rank, idx in enumerate(order[:TOP_N], start=1):
     print("Final pose:")
     print(infos[idx]["final_6dof_pose"])
 
-
-# Save top 10 candidates
 top_infos = []
 
 for idx in order[:TOP_N]:

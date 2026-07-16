@@ -56,7 +56,7 @@ def load_data(args):
 		is_robust_pose_flag = load_all_flags(folder)
 		for ind, pose in enumerate(all_6dof_poses):
 			if not is_robust_pose_flag[ind]:
-				continue  # ignorer cet individu non stable
+				continue  
 			fitness_list.append(fitnesses[ind])
 			final_pose_list.append(pose_list_to_dict([pose])[0])
 	else :
@@ -76,7 +76,7 @@ def smooth_counts(points, counts, radius=0.01):
 
 	for i, pt in enumerate(points):
 		idx = tree.query_ball_point(pt, r=radius)
-		smoothed[i] = np.mean(counts[idx])  # moyenne locale
+		smoothed[i] = np.mean(counts[idx])  
 	return smoothed
 	  
 def display_3d_heatmap(env, points, counts, title='', export_path=None) :
