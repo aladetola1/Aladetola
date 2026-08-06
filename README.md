@@ -6,9 +6,6 @@
 
 PlaceIt is a Quality-Diversity (QD) framework for generating stable object placements. This repository extends the original framework by introducing a **Robot-independent Geometric Manipulation Proxy (RGMP)** to evaluate and rank stable placements according to their predicted **Grasp Friendliness Index (GFI)**. The resulting placement ranking is intended to facilitate downstream robotic manipulation.
 
-
-
-
 ---
 
 # 🎥 Demonstration Videos
