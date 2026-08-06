@@ -39,7 +39,17 @@ https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113
 📹 **Open or download the experimental video:**  
 [hardware_validation_bowl.mp4](https://github.com/user-attachments/assets/d10bd57a-4d72-4998-ae93-7d5c3644a8ae)
 
-> **Note:** Both hardware experiments use the 6-DoF object poses exported by the proposed RGMP framework, demonstrating successful transfer from simulation to real-world robotic manipulation.
+## Experimental Hardware Validation – Spoon
+
+The following video demonstrates the applicability of the proposed RGMP/GFI framework to elongated objects using the YCB Spoon. Starting from the highest-ranked grasp-aware placement exported directly from simulation, the TIAGo robot autonomously executes the grasp and successfully retrieves the object without requiring any modification to the placement-ranking framework.
+
+https://github.com/user-attachments/assets/b3a63d64-6557-4c8e-af08-652459d04d25
+
+📹 **Open or download the experimental video:**  
+[hardware_validation_spoon.mp4](https://github.com/user-attachments/assets/<SPOON_ATTACHMENT_ID>)
+
+
+> **Note:** The hardware experiments use the 6-DoF object poses exported by the proposed RGMP framework, demonstrating successful transfer from simulation to real-world robotic manipulation.
 
 ---
 
