@@ -76,7 +76,7 @@ The current benchmark includes:
 If you use this repository in your research, please cite:
 
 > O. D. Aladetola *et al.*  
-> **From Stable Placement to Grasp-Friendly Placement: A Quality-Diversity Framework for Robotic Manipulation.**  
+> **From Stable Placement to Grasp-Aware Placement: A Robot-Independent Geometric Manipulation Proxy for Quality-Diversity Robotic Placement.**  
 > *(Manuscript currently under peer review.)*
 
 A DOI and BibTeX entry will be added upon publication.
@@ -172,12 +172,41 @@ demo/              Demonstration videos
 environments/      Simulation environments and object models
 evaluation/        Placement evaluation
 paper/             Manuscript (to be added after publication)
+paper_runs/        Canonical optimization runs used in the paper
+results/           Final figures, tables, and videos
 scripts/           Rendering and visualization scripts
 utils/             Utility functions
 visualization/     Plotting and replay utilities
 ```
 
 ---
+# Canonical Paper Runs
+
+The canonical optimization runs used to generate the results reported in the manuscript are available in the `paper_runs/` directory.
+
+| Object | Canonical Run |
+|---------|---------------|
+| Mug | `run87` |
+| Bowl | `run89` |
+| Power Drill | `run97` |
+| Plate | `run100` |
+| Banana | `run103` |
+| Spoon | `run94` |
+
+These runs correspond to the final experiments used to generate:
+
+- Top-10 GFI placement rankings
+- RGMP component analyses
+- Height evaluation
+- Workspace-centrality evaluation
+- Uprightness evaluation
+- Combined paper figures
+- Experimental validation results
+- Supplementary videos
+
+Each folder in `paper_runs/` has been renamed by object for clarity while preserving the original optimization outputs.
+
+
 
 # License
 
