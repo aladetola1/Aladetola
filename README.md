@@ -1,4 +1,5 @@
 # PlaceIt!
+### A Robot-Independent Geometric Manipulation Proxy for Quality-Diversity Robotic Placement
 
 PlaceIt is a Quality-Diversity (QD) framework for generating stable object placements.
 
