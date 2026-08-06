@@ -37,7 +37,7 @@ The following video demonstrates the generalization capability of the proposed R
 https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113
 
 📹 **Open or download the experimental video:**  
-[demo/hardware_validation_bowl.mp4](demo/hardware_validation_bowl.mp4)
+[hardware_validation_bowl.mp4](https://github.com/user-attachments/assets/d10bd57a-4d72-4998-ae93-7d5c3644a8ae)
 
 > **Note:** Both hardware experiments use the 6-DoF object poses exported by the proposed RGMP framework, demonstrating successful transfer from simulation to real-world robotic manipulation.
 
