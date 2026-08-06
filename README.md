@@ -25,9 +25,8 @@ The following conceptual animation illustrates the intended integration of the p
 https://github.com/user-attachments/assets/ae89daad-6938-4f83-9c4c-8c10c88197bc
 
 📹 **Download the original video:**  
-[demo/concept_robot_grasp_demo.mp4](demo/concept_robot_grasp_demo.mp4)
 
-> **Note:** This animation is an illustrative visualization of the proposed **PlaceIt → RGMP → robotic manipulation** workflow. It is intended to communicate the envisioned downstream integration.
+https://github.com/user-attachments/assets/f861efbc-f4e2-42a3-8754-59e1fdae83e7
 ---
 
 # Before starting
