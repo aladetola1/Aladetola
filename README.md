@@ -1,6 +1,6 @@
 
 
-https://github.com/user-attachments/assets/a64c5833-48e1-4701-ad67-7c8073ca6117
+
 
 
 # PlaceIt!
@@ -25,7 +25,7 @@ https://github.com/user-attachments/assets/8763c6b4-1c20-4fbb-9681-c4f281cabfa5
 
 https://github.com/user-attachments/assets/d95ec115-66bf-4088-b442-e27976a93f4a
 ---
-
+https://github.com/user-attachments/assets/a64c5833-48e1-4701-ad67-7c8073ca6117
 # Before starting
 
 ## Requirement
