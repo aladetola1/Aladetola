@@ -28,3 +28,29 @@ tmp/
 .idea/
 .DS_Store
 Thumbs.db
+
+# ------------------------------------------------------------
+# Final RGMP/GFI publication assets preserved in GitHub
+# ------------------------------------------------------------
+
+# Allow selected final result directories
+!/results/
+/results/*
+!/results/gfi_component_figures/
+!/results/gfi_component_figures/**
+!/results/center_far_placements/
+!/results/center_far_placements/**
+!/results/combined_plots/
+!/results/combined_plots/**
+!/results/top10_gfi_tables/
+!/results/top10_gfi_tables/**
+!/results/top10_pose_videos/
+!/results/top10_pose_videos/**
+!/results/experimental_validation/
+!/results/experimental_validation/**
+
+# Preserve reproducibility scripts from robustness evaluation
+!/robustness_eval/
+/robustness_eval/*
+!/robustness_eval/scripts/
+!/robustness_eval/scripts/**

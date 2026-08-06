@@ -1,4 +1,3 @@
-
 from __future__ import annotations
 
 import argparse
@@ -47,7 +46,9 @@ OBJECTS = {
 
 
 TABLE_RGBA = [0.66, 0.49, 0.32, 1.0]
-MUG_RGBA = [0.44, 0.11, 0.11, 1.0]
+
+# Uniform wine colour applied to every rendered object.
+OBJECT_RGBA = [0.44, 0.11, 0.11, 1.0]
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -132,7 +133,10 @@ def extract_final_pose(
         rpy = np.asarray(final_pose["euler_rpy"], dtype=float)
 
     else:
-        pose_array = np.asarray(final_pose, dtype=float).reshape(-1)
+        pose_array = np.asarray(
+            final_pose,
+            dtype=float,
+        ).reshape(-1)
 
         if len(pose_array) < 6:
             raise ValueError(
@@ -169,7 +173,10 @@ def load_font(size: int) -> ImageFont.ImageFont:
 
     for font_path in possible_fonts:
         if os.path.exists(font_path):
-            return ImageFont.truetype(font_path, size=size)
+            return ImageFont.truetype(
+                font_path,
+                size=size,
+            )
 
     return ImageFont.load_default()
 
@@ -204,7 +211,9 @@ def create_scene(
 
     p.resetSimulation()
     p.setGravity(0, 0, -9.81)
-    p.setAdditionalSearchPath(pybullet_data.getDataPath())
+    p.setAdditionalSearchPath(
+        pybullet_data.getDataPath()
+    )
 
     p.loadURDF("plane.urdf")
 
@@ -229,7 +238,9 @@ def create_scene(
         basePosition=table_position,
     )
 
-    quaternion = p.getQuaternionFromEuler(rpy.tolist())
+    quaternion = p.getQuaternionFromEuler(
+        rpy.tolist()
+    )
 
     object_id = p.loadURDF(
         object_urdf,
@@ -238,16 +249,16 @@ def create_scene(
         useFixedBase=True,
     )
 
-    if object_name == "mug":
-        apply_colour_to_body(
-            body_id=object_id,
-            rgba_colour=MUG_RGBA,
-        )
+    # Apply the same wine colour to every object.
+    apply_colour_to_body(
+        body_id=object_id,
+        rgba_colour=OBJECT_RGBA,
+    )
 
-        print(
-            f"[COLOUR] Mug body {object_id} forced to "
-            f"{MUG_RGBA}"
-        )
+    print(
+        f"[COLOUR] {object_name.replace('_', ' ').title()} "
+        f"body {object_id} forced to {OBJECT_RGBA}"
+    )
 
 
 def render_scene(
@@ -276,10 +287,21 @@ def render_scene(
         renderer=p.ER_TINY_RENDERER,
     )
 
-    rgba = np.asarray(camera_image[2], dtype=np.uint8)
-    rgba = rgba.reshape(height, width, 4)
+    rgba = np.asarray(
+        camera_image[2],
+        dtype=np.uint8,
+    )
 
-    return Image.fromarray(rgba[:, :, :3], mode="RGB")
+    rgba = rgba.reshape(
+        height,
+        width,
+        4,
+    )
+
+    return Image.fromarray(
+        rgba[:, :, :3],
+        mode="RGB",
+    )
 
 
 def add_information_overlay(
@@ -293,12 +315,15 @@ def add_information_overlay(
 ) -> Image.Image:
 
     output = image.copy()
-    draw = ImageDraw.Draw(output, mode="RGBA")
+    draw = ImageDraw.Draw(
+        output,
+        mode="RGBA",
+    )
 
     title_font = load_font(42)
     text_font = load_font(27)
 
-    panel = (25, 25, 760, 245)
+    panel = (25, 25, 950, 320)
 
     draw.rounded_rectangle(
         panel,
@@ -313,50 +338,41 @@ def add_information_overlay(
         fill=(255, 255, 255, 255),
     )
 
-    gfi_text = "not stored" if np.isnan(gfi) else f"{gfi:.4f}"
+    gfi_text = (
+        "not stored"
+        if np.isnan(gfi)
+        else f"{gfi:.4f}"
+    )
+
+    rpy_deg = np.degrees(rpy)
 
     lines = [
-        f"Object: {object_name.replace('_', ' ').title()}",
+        (
+            "Object: "
+            f"{object_name.replace('_', ' ').title()}"
+        ),
         f"GFI: {gfi_text}",
         (
             "Position [m]: "
-            f"x={xyz[0]:.3f}, y={xyz[1]:.3f}, z={xyz[2]:.3f}"
+            f"x={xyz[0]:.3f}, "
+            f"y={xyz[1]:.3f}, "
+            f"z={xyz[2]:.3f}"
         ),
         (
-            "Orientation [rad]: "
-            f"roll={rpy[0]:.3f}, pitch={rpy[1]:.3f}, "
-            f"yaw={rpy[2]:.3f}"
+            "Orientation [deg]: "
+            f"Roll={rpy_deg[0]:.2f}°, "
+            f"Pitch={rpy_deg[1]:.2f}°"
         ),
+        f"Yaw={rpy_deg[2]:.2f}°",
     ]
 
-    for line_number, line in enumerate(lines):
+    for index, line in enumerate(lines):
         draw.text(
-            (58, 105 + 31 * line_number),
+            (55, 95 + index * 30),
             line,
             font=text_font,
             fill=(255, 255, 255, 255),
         )
-
-    footer_font = load_font(30)
-
-    footer_text = (
-        "Top-ranked placement according to predicted grasp friendliness"
-    )
-
-    footer_box = (260, 910, 1140, 975)
-
-    draw.rounded_rectangle(
-        footer_box,
-        radius=18,
-        fill=(0, 0, 0, 165),
-    )
-
-    draw.text(
-        (300, 925),
-        footer_text,
-        font=footer_font,
-        fill=(255, 255, 255, 255),
-    )
 
     return output
 
@@ -372,19 +388,24 @@ def generate_frames(
     configuration = OBJECTS[object_name]
 
     candidates_path = (
-        Path(configuration["run"]) / "top10_grasp_candidates.npy"
+        Path(configuration["run"])
+        / "top10_grasp_candidates.npy"
     )
 
-    object_urdf = Path(configuration["urdf"])
+    object_urdf = Path(
+        configuration["urdf"]
+    )
 
     if not candidates_path.exists():
         raise FileNotFoundError(
-            f"Top-10 candidate file not found: {candidates_path}"
+            f"Top-10 candidate file not found: "
+            f"{candidates_path}"
         )
 
     if not object_urdf.exists():
         raise FileNotFoundError(
-            f"Object URDF not found: {object_urdf}"
+            f"Object URDF not found: "
+            f"{object_urdf}"
         )
 
     loaded_candidates = np.load(
@@ -392,14 +413,21 @@ def generate_frames(
         allow_pickle=True,
     )
 
-    number_to_render = min(top_k, len(loaded_candidates))
+    number_to_render = min(
+        top_k,
+        len(loaded_candidates),
+    )
 
     if number_to_render == 0:
-        raise RuntimeError("The candidate file is empty.")
+        raise RuntimeError(
+            "The candidate file is empty."
+        )
 
     selected_candidates = [
         convert_candidate(candidate)
-        for candidate in loaded_candidates[:number_to_render]
+        for candidate in loaded_candidates[
+            :number_to_render
+        ]
     ]
 
     frames_directory = (
@@ -409,7 +437,9 @@ def generate_frames(
     )
 
     if frames_directory.exists():
-        shutil.rmtree(frames_directory)
+        shutil.rmtree(
+            frames_directory
+        )
 
     frames_directory.mkdir(
         parents=True,
@@ -418,22 +448,40 @@ def generate_frames(
 
     frames_per_pose = max(
         1,
-        int(round(seconds_per_pose * fps)),
+        int(
+            round(
+                seconds_per_pose * fps
+            )
+        ),
     )
 
     frame_number = 1
 
     print(f"\nObject: {object_name}")
-    print(f"Candidate file: {candidates_path}")
-    print(f"Rendering {number_to_render} placements")
-    print(f"Frames per pose: {frames_per_pose}")
+    print(
+        f"Candidate file: "
+        f"{candidates_path}"
+    )
+    print(
+        f"Rendering "
+        f"{number_to_render} placements"
+    )
+    print(
+        f"Frames per pose: "
+        f"{frames_per_pose}"
+    )
 
     for rank, candidate in enumerate(
         selected_candidates,
         start=1,
     ):
-        xyz, rpy = extract_final_pose(candidate)
-        gfi = extract_gfi(candidate)
+        xyz, rpy = extract_final_pose(
+            candidate
+        )
+
+        gfi = extract_gfi(
+            candidate
+        )
 
         create_scene(
             object_name=object_name,
@@ -465,7 +513,9 @@ def generate_frames(
             exist_ok=True,
         )
 
-        annotated_image.save(still_path)
+        annotated_image.save(
+            still_path
+        )
 
         for _ in range(frames_per_pose):
             frame_path = (
@@ -473,7 +523,10 @@ def generate_frames(
                 / f"frame_{frame_number:06d}.png"
             )
 
-            annotated_image.save(frame_path)
+            annotated_image.save(
+                frame_path
+            )
+
             frame_number += 1
 
         print(
@@ -482,7 +535,10 @@ def generate_frames(
             f"pose={np.concatenate([xyz, rpy])}"
         )
 
-    return frames_directory, frame_number - 1
+    return (
+        frames_directory,
+        frame_number - 1,
+    )
 
 
 def create_mp4(
@@ -491,7 +547,9 @@ def create_mp4(
     fps: int,
 ) -> None:
 
-    ffmpeg_executable = shutil.which("ffmpeg")
+    ffmpeg_executable = shutil.which(
+        "ffmpeg"
+    )
 
     if ffmpeg_executable is None:
         raise RuntimeError(
@@ -511,7 +569,10 @@ def create_mp4(
         "-framerate",
         str(fps),
         "-i",
-        str(frames_directory / "frame_%06d.png"),
+        str(
+            frames_directory
+            / "frame_%06d.png"
+        ),
         "-c:v",
         "libx264",
         "-preset",
@@ -525,8 +586,14 @@ def create_mp4(
         str(output_video),
     ]
 
-    print("\nCreating MP4 with ffmpeg...")
-    subprocess.run(command, check=True)
+    print(
+        "\nCreating MP4 with ffmpeg..."
+    )
+
+    subprocess.run(
+        command,
+        check=True,
+    )
 
 
 def main() -> int:
@@ -558,7 +625,9 @@ def main() -> int:
         exist_ok=True,
     )
 
-    client_id = p.connect(p.DIRECT)
+    client_id = p.connect(
+        p.DIRECT
+    )
 
     if client_id < 0:
         print(
@@ -572,18 +641,28 @@ def main() -> int:
     )
 
     try:
-        frames_directory, total_frames = generate_frames(
+        (
+            frames_directory,
+            total_frames,
+        ) = generate_frames(
             object_name=arguments.object,
             top_k=arguments.top_k,
-            seconds_per_pose=arguments.seconds_per_pose,
+            seconds_per_pose=(
+                arguments.seconds_per_pose
+            ),
             fps=arguments.fps,
-            output_directory=arguments.output_dir,
+            output_directory=(
+                arguments.output_dir
+            ),
         )
 
         output_video = (
             arguments.output_dir
             / arguments.object
-            / f"{arguments.object}_top{arguments.top_k}_gfi.mp4"
+            / (
+                f"{arguments.object}_"
+                f"top{arguments.top_k}_gfi.mp4"
+            )
         )
 
         create_mp4(
@@ -592,9 +671,15 @@ def main() -> int:
             fps=arguments.fps,
         )
 
-        print("\nCompleted successfully.")
-        print(f"Total frames: {total_frames}")
-        print(f"Video saved to: {output_video}")
+        print(
+            "\nCompleted successfully."
+        )
+        print(
+            f"Total frames: {total_frames}"
+        )
+        print(
+            f"Video saved to: {output_video}"
+        )
 
     except Exception as error:
         print(
@@ -611,4 +696,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-PY
