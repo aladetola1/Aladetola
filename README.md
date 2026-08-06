@@ -17,16 +17,9 @@ https://github.com/user-attachments/assets/8763c6b4-1c20-4fbb-9681-c4f281cabfa5
 [demo/mug_top10_gfi.mp4](demo/mug_top10_gfi.mp4)
 
 ---
+## Test Video
 
-## Concept Robot Integration
-
-The following conceptual animation illustrates the intended integration of the proposed placement evaluation framework with a robotic grasping system.
-
-https://github.com/user-attachments/assets/ae89daad-6938-4f83-9c4c-8c10c88197bc
-
-📹 **Download the original video:**  
-
-https://github.com/user-attachments/assets/f861efbc-f4e2-42a3-8754-59e1fdae83e7
+https://github.com/user-attachments/assets/d95ec115-66bf-4088-b442-e27976a93f4a
 ---
 
 # Before starting
