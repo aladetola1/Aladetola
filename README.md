@@ -28,7 +28,7 @@ The following video presents the experimental validation of the proposed RGMP/GF
 https://github.com/user-attachments/assets/a64c5833-48e1-4701-ad67-7c8073ca6117
 
 📹 **Open or download the experimental video:**  
-[hardware_validation.mp4](https://github.com/user-attachments/assets/d95ec115-66bf-4088-b442-e27976a93f4a)
+[hardware_validation_bowl.mp4](https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113)
 
 ## Experimental Hardware Validation – Bowl
 
