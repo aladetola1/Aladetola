@@ -91,6 +91,7 @@ def save_individual_bar_plots() -> None:
 
 def save_combined_line_plot() -> None:
     """Generate one comparison plot for Mug, Bowl, and Spoon."""
+
     fig, ax = plt.subplots(figsize=(6.8, 4.2))
 
     marker_styles = {
@@ -116,43 +117,66 @@ def save_combined_line_plot() -> None:
             label=object_name,
         )
 
+    # Axis labels
     ax.set_xlabel("GFI Rank", fontsize=10)
     ax.set_ylabel("Grasp Success Rate (%)", fontsize=10)
+
+    # Top-10 GFI ranks
     ax.set_xticks(RANKS)
-    ax.set_ylim(0, 110)
-    ax.set_yticks(np.arange(0, 101, 20))
-    ax.grid(True, linestyle="--", linewidth=0.6, alpha=0.7)
-    ax.tick_params(axis="both", labelsize=9)
-    ax.legend(fontsize=9, frameon=True)
+
+    ax.set_ylim(60, 101.5)
+    ax.set_yticks([60, 70, 80, 90, 100])
+
+    ax.set_xlim(0.55, 10.45)
+
+    ax.grid(
+        True,
+        linestyle="--",
+        linewidth=0.6,
+        alpha=0.7,
+    )
+
+    ax.tick_params(
+        axis="both",
+        labelsize=9,
+    )
+
+    # Legend
+    ax.legend(
+        fontsize=9,
+        frameon=True,
+        loc="upper right",
+    )
 
     fig.tight_layout()
 
     fig.savefig(
         OUTPUT_DIR / "combined_grasp_success_comparison.pdf",
         bbox_inches="tight",
-        pad_inches=0.02,
+        pad_inches=0.08,
     )
+
     fig.savefig(
         OUTPUT_DIR / "combined_grasp_success_comparison.png",
         dpi=600,
         bbox_inches="tight",
-        pad_inches=0.02,
+        pad_inches=0.08,
     )
 
     fig.savefig(
         OUTPUT_DIR / "grasp_success_by_rank.pdf",
         bbox_inches="tight",
-        pad_inches=0.02,
+        pad_inches=0.08,
     )
+
     fig.savefig(
         OUTPUT_DIR / "grasp_success_by_rank.png",
         dpi=600,
         bbox_inches="tight",
-        pad_inches=0.02,
+        pad_inches=0.08,
     )
 
     plt.close(fig)
-
 
 def save_average_success_plot() -> None:
     """Plot the mean success rate across the ten ranked placements."""
