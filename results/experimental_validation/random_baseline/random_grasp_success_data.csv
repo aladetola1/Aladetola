@@ -1,4 +1,4 @@
-object,random_rank,grasp_success_rate_percent
+object,sample,grasp_success_rate_percent
 Mug,1,100.0
 Mug,2,100.0
 Mug,3,100.0

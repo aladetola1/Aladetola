@@ -54,3 +54,7 @@ Thumbs.db
 /robustness_eval/*
 !/robustness_eval/scripts/
 !/robustness_eval/scripts/**
+
+# Local Python environment
+.venv/
+*.egg-info/

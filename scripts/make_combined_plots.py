@@ -29,9 +29,22 @@ def load_data(run_path):
         "data_export.pkl"
     )
 
+    # The original paper-run directories were removed during
+    # repository cleaning. Their data_export.pkl files were
+    # preserved under paper_runs/<object>/.
+    if not os.path.exists(data_path):
+        object_name = os.path.basename(
+            os.path.dirname(run_path)
+        )
+
+        data_path = os.path.join(
+            "paper_runs",
+            object_name,
+            "data_export.pkl"
+        )
+
     with open(data_path, "rb") as f:
         return pickle.load(f)
-
 
 def load_final_archive(run_path):
     archive_path = os.path.join(
@@ -54,7 +67,6 @@ def add_zero_start(x, y):
         np.insert(x, 0, 0),
         np.insert(y, 0, 0)
     )
-
 
 def save_line_plot(
     filename,
@@ -84,17 +96,68 @@ def save_line_plot(
         plt.plot(
             x,
             y,
-            linewidth=2,
+            linewidth=3.2,
             label=obj_name
         )
 
-    plt.xlabel("Number of evaluations")
-    plt.ylabel(ylabel)
-    plt.title(title)
-    plt.grid(True, alpha=0.3)
-    plt.legend()
+    # ---------------------------------------------------------
+    # Axis labels: large, normal weight
+    # ---------------------------------------------------------
+    plt.xlabel(
+        "Number of evaluations",
+        fontsize=22
+    )
+
+    plt.ylabel(
+        ylabel,
+        fontsize=22
+    )
+
+    # ---------------------------------------------------------
+    # Plot title: large, normal weight
+    # ---------------------------------------------------------
+    plt.title(
+        title,
+        fontsize=22,
+        pad=12
+    )
+
+    # ---------------------------------------------------------
+    # Tick labels
+    # ---------------------------------------------------------
+    plt.xticks(
+        fontsize=18
+    )
+
+    plt.yticks(
+        fontsize=18
+    )
+
+    # ---------------------------------------------------------
+    # Grid
+    # ---------------------------------------------------------
+    plt.grid(
+        True,
+        alpha=0.3,
+        linewidth=0.9
+    )
+
+    # ---------------------------------------------------------
+    # Legend: large and bold object names
+    # ---------------------------------------------------------
+    legend = plt.legend(
+        fontsize=17,
+        frameon=True
+    )
+
+    for text in legend.get_texts():
+        text.set_fontweight("bold")
+
     plt.tight_layout()
 
+    # ---------------------------------------------------------
+    # Save PNG
+    # ---------------------------------------------------------
     save_path = os.path.join(
         OUT_DIR,
         filename
@@ -106,27 +169,113 @@ def save_line_plot(
         bbox_inches="tight"
     )
 
+    # ---------------------------------------------------------
+    # Save vector PDF
+    # ---------------------------------------------------------
+    pdf_path = os.path.splitext(save_path)[0] + ".pdf"
+
+    plt.savefig(
+        pdf_path,
+        format="pdf",
+        bbox_inches="tight"
+    )
+
     plt.close()
 
     print("Saved:", save_path)
-
+    print("Saved:", pdf_path)
 
 def plot_final_grasp_friendliness_boxplot():
     labels = []
     all_grasp_scores = []
 
     for obj_name, run_path in RUNS.items():
-        archive = load_final_archive(run_path)
 
-        infos = archive["infos"]
+        # ---------------------------------------------------------
+        # Load preserved canonical paper-run data
+        # ---------------------------------------------------------
+        data = load_data(run_path)
 
-        grasp_scores = np.array(
-            [x["grasp_proxy"] for x in infos],
+        poses = np.asarray(
+            data["final_6dof_pos"],
+            dtype=object
+        )
+
+        # ---------------------------------------------------------
+        # Keep only mechanically stable placements.
+        #
+        # This exactly reproduces the canonical stable-placement
+        # counts:
+        # Mug 481, Bowl 217, Spoon 389,
+        # Power Drill 549, Plate 242, Banana 213.
+        # ---------------------------------------------------------
+        stable_poses = [
+            p for p in poses
+            if float(p["xyz"][2]) > 0
+        ]
+
+        # ---------------------------------------------------------
+        # Compute GFI using the frozen implementation:
+        #
+        # H = z
+        # D = exp(-d / 0.1)
+        # U = exp(-sqrt(roll^2 + pitch^2))
+        # GFI = 0.5 H + 0.3 D + 0.2 U
+        #
+        # Yaw is intentionally unused.
+        # ---------------------------------------------------------
+        grasp_scores = []
+
+        for pose in stable_poses:
+            xyz = np.asarray(
+                pose["xyz"],
+                dtype=float
+            )
+
+            rpy = np.asarray(
+                pose["euler_rpy"],
+                dtype=float
+            )
+
+            roll, pitch, yaw = rpy
+
+            height_score = xyz[2]
+
+            center_distance = np.linalg.norm(
+                xyz[:2]
+            )
+
+            tilt = np.sqrt(
+                roll**2 + pitch**2
+            )
+
+            center_score = np.exp(
+                -center_distance / 0.1
+            )
+
+            upright_score = np.exp(
+                -tilt
+            )
+
+            grasp_proxy = (
+                0.5 * height_score
+                + 0.3 * center_score
+                + 0.2 * upright_score
+            )
+
+            grasp_scores.append(
+                grasp_proxy
+            )
+
+        grasp_scores = np.asarray(
+            grasp_scores,
             dtype=float
         )
 
         labels.append(obj_name)
-        all_grasp_scores.append(grasp_scores)
+        all_grasp_scores.append(
+            grasp_scores
+        )
 
         print(
             f"{obj_name}: "
@@ -137,6 +286,9 @@ def plot_final_grasp_friendliness_boxplot():
             f"max={np.max(grasp_scores):.4f}"
         )
 
+    # ---------------------------------------------------------
+    # Figure
+    # ---------------------------------------------------------
     plt.figure(figsize=(9, 6))
 
     bp = plt.boxplot(
@@ -144,19 +296,40 @@ def plot_final_grasp_friendliness_boxplot():
         labels=labels,
         showmeans=True,
         patch_artist=False,
+
+        boxprops=dict(
+            linewidth=2.2
+        ),
+
+        whiskerprops=dict(
+            linewidth=2.0
+        ),
+
+        capprops=dict(
+            linewidth=2.0
+        ),
+
         meanprops=dict(
             marker="o",
             markerfacecolor="white",
             markeredgecolor="black",
-            markersize=7
+            markeredgewidth=1.8,
+            markersize=9
         ),
+
         medianprops=dict(
-            linewidth=1.8
+            linewidth=2.4
+        ),
+
+        flierprops=dict(
+            marker="o",
+            markersize=4,
+            alpha=0.65
         )
     )
 
     # ---------------------------------------------------------
-    # Legend: explicitly identify mean and median
+    # Legend: Mean and Median
     # ---------------------------------------------------------
     from matplotlib.lines import Line2D
 
@@ -168,40 +341,82 @@ def plot_final_grasp_friendliness_boxplot():
             linestyle="None",
             markerfacecolor="white",
             markeredgecolor="black",
-            markersize=7,
+            markeredgewidth=1.8,
+            markersize=9,
             label="Mean"
         ),
         Line2D(
             [0],
             [0],
             color="tab:orange",
-            linewidth=1.8,
+            linewidth=2.4,
             label="Median"
         )
     ]
-    plt.legend(
+
+    legend = plt.legend(
         handles=legend_elements,
         loc="upper right",
         ncol=2,
+        fontsize=17,
         frameon=True,
         columnspacing=1.2,
         handletextpad=0.5
     )
 
-    plt.xlabel("Object")
-    plt.ylabel("Grasp Friendliness Index (GFI)")
-    plt.title("Distribution of GFI Across Stable Placements")
+    for text in legend.get_texts():
+        text.set_fontweight("bold")
 
-    plt.xticks(rotation=25)
+    # ---------------------------------------------------------
+    # Axis labels
+    # Same visual standard as Fig. 4
+    # ---------------------------------------------------------
+    plt.xlabel(
+        "Object",
+        fontsize=22
+    )
 
+    plt.ylabel(
+        "Grasp Friendliness Index (GFI)",
+        fontsize=22
+    )
+
+    # ---------------------------------------------------------
+    # Title
+    # ---------------------------------------------------------
+    plt.title(
+        "Distribution of GFI Across Stable Placements",
+        fontsize=22,
+        pad=12
+    )
+
+    # ---------------------------------------------------------
+    # Tick labels
+    # ---------------------------------------------------------
+    plt.xticks(
+        rotation=25,
+        fontsize=18
+    )
+
+    plt.yticks(
+        fontsize=18
+    )
+
+    # ---------------------------------------------------------
+    # Grid
+    # ---------------------------------------------------------
     plt.grid(
         True,
         axis="y",
-        alpha=0.3
+        alpha=0.3,
+        linewidth=0.9
     )
 
     plt.tight_layout()
 
+    # ---------------------------------------------------------
+    # Save high-resolution PNG
+    # ---------------------------------------------------------
     save_path = os.path.join(
         OUT_DIR,
         "combined_gfi_boxplot.png"
@@ -213,10 +428,23 @@ def plot_final_grasp_friendliness_boxplot():
         bbox_inches="tight"
     )
 
+    # ---------------------------------------------------------
+    # Save vector PDF
+    # ---------------------------------------------------------
+    pdf_path = os.path.splitext(
+        save_path
+    )[0] + ".pdf"
+
+    plt.savefig(
+        pdf_path,
+        format="pdf",
+        bbox_inches="tight"
+    )
+
     plt.close()
 
     print("Saved:", save_path)
-
+    print("Saved:", pdf_path)
 
 def plot_grasp_friendliness_histogram():
     plt.figure(figsize=(9, 6))
@@ -283,51 +511,179 @@ def plot_fitness_vs_grasp_scatter():
     plt.figure(figsize=(9, 6))
 
     for obj_name, run_path in RUNS.items():
-        archive = load_final_archive(
-            run_path
+
+        # ---------------------------------------------------------
+        # Load preserved canonical paper-run data
+        # ---------------------------------------------------------
+        data = load_data(run_path)
+
+        poses = np.asarray(
+            data["final_6dof_pos"],
+            dtype=object
         )
 
-        infos = archive["infos"]
-
-        fitnesses = np.array(
-            archive["fitnesses"],
+        fitnesses = np.asarray(
+            data["fitness_list"],
             dtype=float
         )
 
-        grasp_scores = np.array(
-            [
-                x["grasp_proxy"]
-                for x in infos
-            ],
+        # ---------------------------------------------------------
+        # Keep only mechanically stable placements.
+        # This reproduces the canonical stable-placement counts.
+        # ---------------------------------------------------------
+        stable_poses = [
+            p for p in poses
+            if float(p["xyz"][2]) > 0
+        ]
+
+        # ---------------------------------------------------------
+        # Safety check:
+        # stable poses and preserved fitness values must match.
+        # ---------------------------------------------------------
+        if len(stable_poses) != len(fitnesses):
+            raise ValueError(
+                f"{obj_name}: stable poses "
+                f"({len(stable_poses)}) != fitness values "
+                f"({len(fitnesses)})"
+            )
+
+        # ---------------------------------------------------------
+        # Compute GFI using the frozen implementation:
+        #
+        # H = z
+        # D = exp(-d / 0.1)
+        # U = exp(-sqrt(roll^2 + pitch^2))
+        # GFI = 0.5 H + 0.3 D + 0.2 U
+        #
+        # Yaw is intentionally unused.
+        # ---------------------------------------------------------
+        grasp_scores = []
+
+        for pose in stable_poses:
+            xyz = np.asarray(
+                pose["xyz"],
+                dtype=float
+            )
+
+            rpy = np.asarray(
+                pose["euler_rpy"],
+                dtype=float
+            )
+
+            roll, pitch, yaw = rpy
+
+            height_score = xyz[2]
+
+            center_distance = np.linalg.norm(
+                xyz[:2]
+            )
+
+            tilt = np.sqrt(
+                roll**2 + pitch**2
+            )
+
+            center_score = np.exp(
+                -center_distance / 0.1
+            )
+
+            upright_score = np.exp(
+                -tilt
+            )
+
+            grasp_proxy = (
+                0.5 * height_score
+                + 0.3 * center_score
+                + 0.2 * upright_score
+            )
+
+            grasp_scores.append(
+                grasp_proxy
+            )
+
+        grasp_scores = np.asarray(
+            grasp_scores,
             dtype=float
         )
 
+        # ---------------------------------------------------------
+        # Scatter plot
+        # ---------------------------------------------------------
         plt.scatter(
             fitnesses,
             grasp_scores,
-            s=18,
-            alpha=0.55,
+            s=32,
+            alpha=0.60,
             label=obj_name
         )
 
-    plt.xlabel("Fitness")
+        print(
+            f"{obj_name}: "
+            f"n={len(grasp_scores)}, "
+            f"fitness=[{np.min(fitnesses):.4f}, "
+            f"{np.max(fitnesses):.4f}], "
+            f"GFI=[{np.min(grasp_scores):.4f}, "
+            f"{np.max(grasp_scores):.4f}]"
+        )
+
+    # ---------------------------------------------------------
+    # Axis labels
+    # Same visual standard as Figs. 4 and 5
+    # ---------------------------------------------------------
+    plt.xlabel(
+        "PlaceIt fitness",
+        fontsize=22
+    )
 
     plt.ylabel(
-        "Grasp accessibility score"
+        "Grasp Friendliness Index (GFI)",
+        fontsize=22
     )
 
+    # ---------------------------------------------------------
+    # Title
+    # ---------------------------------------------------------
     plt.title(
-        "Fitness vs Grasp-Friendliness Across Objects"
+        "PlaceIt Fitness vs. GFI",
+        fontsize=22,
+        pad=12
     )
 
+    # ---------------------------------------------------------
+    # Tick labels
+    # ---------------------------------------------------------
+    plt.xticks(
+        fontsize=18
+    )
+
+    plt.yticks(
+        fontsize=18
+    )
+
+    # ---------------------------------------------------------
+    # Grid
+    # ---------------------------------------------------------
     plt.grid(
         True,
-        alpha=0.3
+        alpha=0.3,
+        linewidth=0.9
     )
 
-    plt.legend()
+    # ---------------------------------------------------------
+    # Legend
+    # ---------------------------------------------------------
+    legend = plt.legend(
+        fontsize=17,
+        frameon=True
+    )
+
+    for text in legend.get_texts():
+        text.set_fontweight("bold")
+
     plt.tight_layout()
 
+    # ---------------------------------------------------------
+    # Save high-resolution PNG
+    # ---------------------------------------------------------
     save_path = os.path.join(
         OUT_DIR,
         "combined_fitness_vs_grasp_scatter.png"
@@ -339,10 +695,23 @@ def plot_fitness_vs_grasp_scatter():
         bbox_inches="tight"
     )
 
+    # ---------------------------------------------------------
+    # Save vector PDF
+    # ---------------------------------------------------------
+    pdf_path = os.path.splitext(
+        save_path
+    )[0] + ".pdf"
+
+    plt.savefig(
+        pdf_path,
+        format="pdf",
+        bbox_inches="tight"
+    )
+
     plt.close()
 
     print("Saved:", save_path)
-
+    print("Saved:", pdf_path)
 
 def copy_original_fitness_plots():
     for obj_name, run_path in RUNS.items():
@@ -381,7 +750,7 @@ def copy_original_fitness_plots():
             )
 
 
-def write_summary_csv():
+#def write_summary_csv():
     csv_path = os.path.join(
         OUT_DIR,
         "summary_metrics.csv"
@@ -509,13 +878,13 @@ save_line_plot(
 
 plot_final_grasp_friendliness_boxplot()
 
-plot_grasp_friendliness_histogram()
+#plot_grasp_friendliness_histogram()
 
 plot_fitness_vs_grasp_scatter()
 
-copy_original_fitness_plots()
+#copy_original_fitness_plots()
 
-write_summary_csv()
+#write_summary_csv()
 
 print(
     "\nAll outputs saved in:",

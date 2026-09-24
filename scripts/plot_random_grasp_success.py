@@ -81,7 +81,7 @@ def save_individual_bar_plots() -> None:
 def save_combined_line_plot() -> None:
     """Generate combined random-selection comparison plot."""
 
-    fig, ax = plt.subplots(figsize=(6.8, 4.2))
+    fig, ax = plt.subplots(figsize=(9, 6))
 
     marker_styles = {
         "Mug": "o",
@@ -101,14 +101,28 @@ def save_combined_line_plot() -> None:
             success_rates,
             marker=marker_styles[object_name],
             linestyle=line_styles[object_name],
-            linewidth=1.7,
-            markersize=5,
+            linewidth=3.2,
+            markersize=10,
             label=object_name,
         )
 
-    ax.set_xlabel("Random Placement Sample", fontsize=10)
-    ax.set_ylabel("Grasp Success Rate (%)", fontsize=10)
+    # ---------------------------------------------------------
+    # Axis labels
+    # Enlarged for readability in the RA-L composite figure
+    # ---------------------------------------------------------
+    ax.set_xlabel(
+        "Random Placement Sample",
+        fontsize=28
+    )
 
+    ax.set_ylabel(
+        "Grasp Success Rate",
+        fontsize=28
+    )
+
+    # ---------------------------------------------------------
+    # Sample indices
+    # ---------------------------------------------------------
     ax.set_xticks(RANKS)
 
     ax.set_ylim(0, 105)
@@ -116,97 +130,162 @@ def save_combined_line_plot() -> None:
 
     ax.set_xlim(0.55, 10.45)
 
-    ax.grid(
-        True,
-        linestyle="--",
-        linewidth=0.6,
-        alpha=0.7,
-    )
-
+    # ---------------------------------------------------------
+    # Tick labels
+    # ---------------------------------------------------------
     ax.tick_params(
         axis="both",
-        labelsize=9,
+        labelsize=22
     )
 
-    ax.legend(
-        fontsize=9,
-        frameon=True,
-        loc="upper right",
+    # ---------------------------------------------------------
+    # Grid
+    # ---------------------------------------------------------
+    ax.grid(
+        True,
+        alpha=0.3,
+        linewidth=0.9
     )
+
+    # ---------------------------------------------------------
+    # Legend
+    # ---------------------------------------------------------
+    legend = ax.legend(
+        fontsize=21,
+        frameon=True,
+        loc="upper right"
+    )
+
+    for text in legend.get_texts():
+        text.set_fontweight("bold")
 
     fig.tight_layout()
 
+    # ---------------------------------------------------------
+    # Save vector PDF
+    # ---------------------------------------------------------
     fig.savefig(
         OUTPUT_DIR / "random_grasp_success_by_rank.pdf",
         bbox_inches="tight",
-        pad_inches=0.08,
+        pad_inches=0.08
     )
 
+    # ---------------------------------------------------------
+    # Save high-resolution PNG
+    # ---------------------------------------------------------
     fig.savefig(
         OUTPUT_DIR / "random_grasp_success_by_rank.png",
-        dpi=600,
+        dpi=300,
         bbox_inches="tight",
-        pad_inches=0.08,
+        pad_inches=0.08
     )
 
     plt.close(fig)
 
-
 def save_average_success_plot() -> None:
     """Plot mean random-selection grasp success."""
-    object_names = list(SUCCESS_DATA.keys())
+
+    object_names = list(
+        SUCCESS_DATA.keys()
+    )
 
     averages = [
         float(np.mean(SUCCESS_DATA[name]))
         for name in object_names
     ]
 
-    fig, ax = plt.subplots(figsize=(5.5, 3.7))
-
-    bars = ax.bar(object_names, averages, width=0.65)
-
-    ax.set_xlabel("Experimental Object", fontsize=10)
-    ax.set_ylabel("Mean Grasp Success Rate (%)", fontsize=10)
-
-    ax.set_ylim(0, 110)
-    ax.set_yticks(np.arange(0, 101, 20))
-
-    ax.grid(
-        axis="y",
-        linestyle="--",
-        linewidth=0.6,
-        alpha=0.7,
+    fig, ax = plt.subplots(
+        figsize=(9, 6)
     )
 
-    ax.tick_params(axis="both", labelsize=9)
+    bars = ax.bar(
+        object_names,
+        averages,
+        width=0.65
+    )
 
-    for bar, value in zip(bars, averages):
+    # ---------------------------------------------------------
+    # Axis labels
+    # Enlarged for readability in the RA-L composite figure
+    # ---------------------------------------------------------
+    ax.set_xlabel(
+        "Experimental Object",
+        fontsize=28
+    )
+
+    ax.set_ylabel(
+        "Mean Grasp Success Rate",
+        fontsize=28
+    )
+
+    # ---------------------------------------------------------
+    # Axis range
+    # ---------------------------------------------------------
+    ax.set_ylim(0, 110)
+
+    ax.set_yticks(
+        np.arange(0, 101, 20)
+    )
+
+    # ---------------------------------------------------------
+    # Tick labels
+    # ---------------------------------------------------------
+    ax.tick_params(
+        axis="both",
+        labelsize=22
+    )
+
+    # ---------------------------------------------------------
+    # Grid
+    # ---------------------------------------------------------
+    ax.grid(
+        axis="y",
+        alpha=0.3,
+        linewidth=0.9
+    )
+
+    # ---------------------------------------------------------
+    # Percentage labels above bars
+    # ---------------------------------------------------------
+    for bar, value in zip(
+        bars,
+        averages
+    ):
         ax.text(
-            bar.get_x() + bar.get_width() / 2,
+            bar.get_x()
+            + bar.get_width() / 2,
             value + 1.5,
             f"{value:.1f}%",
             ha="center",
             va="bottom",
-            fontsize=9,
+            fontsize=22,
+            fontweight="bold"
         )
 
     fig.tight_layout()
 
+    # ---------------------------------------------------------
+    # Save vector PDF
+    # ---------------------------------------------------------
     fig.savefig(
-        OUTPUT_DIR / "random_mean_grasp_success_by_object.pdf",
+        OUTPUT_DIR
+        / "random_mean_grasp_success_by_object.pdf",
         bbox_inches="tight",
-        pad_inches=0.02,
+        pad_inches=0.02
     )
 
+    # ---------------------------------------------------------
+    # Save high-resolution PNG
+    # ---------------------------------------------------------
     fig.savefig(
-        OUTPUT_DIR / "random_mean_grasp_success_by_object.png",
-        dpi=600,
+        OUTPUT_DIR
+        / "random_mean_grasp_success_by_object.png",
+        dpi=300,
         bbox_inches="tight",
-        pad_inches=0.02,
+        pad_inches=0.02
     )
 
     plt.close(fig)
-
 
 def export_data_table() -> None:
     """Export random-selection data and calculated averages."""

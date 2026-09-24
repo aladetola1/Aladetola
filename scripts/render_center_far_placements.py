@@ -37,10 +37,6 @@ from render_top10_poses_video import (  # noqa: E402
 OBJECT_ORDER = [
     "mug",
     "bowl",
-    "banana",
-    "plate",
-    "power_drill",
-    "spoon",
 ]
 
 OUTPUT_ORDER = [
@@ -55,8 +51,7 @@ COLUMN_TITLES = {
     "far_b": "Peripheral Placement B",
 }
 
-OBJECT_DISPLAY_NAMES = {
-    "mug": "Mug",
+OBJECT_DISPLAY_NAMES = {    "mug": "Mug",
     "bowl": "Bowl",
     "banana": "Banana",
     "plate": "Plate",
