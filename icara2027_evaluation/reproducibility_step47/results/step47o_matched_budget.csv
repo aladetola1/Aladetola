@@ -1,0 +1,101 @@
+object,method,budget_per_object,evaluations,successful_selections,success_rate
+Spoon,GFI,1,1,1,1.0
+Spoon,GFI,3,3,2,0.6666666666666666
+Spoon,GFI,5,5,4,0.8
+Spoon,GFI,10,10,9,0.9
+Spoon,Centrality,1,1,1,1.0
+Spoon,Centrality,3,3,2,0.6666666666666666
+Spoon,Centrality,5,5,4,0.8
+Spoon,Centrality,10,10,9,0.9
+Spoon,Height,1,1,1,1.0
+Spoon,Height,3,3,3,1.0
+Spoon,Height,5,5,4,0.8
+Spoon,Height,10,10,8,0.8
+Spoon,Uprightness,1,1,1,1.0
+Spoon,Uprightness,3,3,3,1.0
+Spoon,Uprightness,5,5,5,1.0
+Spoon,Uprightness,10,10,10,1.0
+Spoon,Height+Centrality,1,1,1,1.0
+Spoon,Height+Centrality,3,3,3,1.0
+Spoon,Height+Centrality,5,5,4,0.8
+Spoon,Height+Centrality,10,10,9,0.9
+Banana,GFI,1,1,1,1.0
+Banana,GFI,3,3,2,0.6666666666666666
+Banana,GFI,5,5,4,0.8
+Banana,GFI,10,10,7,0.7
+Banana,Centrality,1,1,1,1.0
+Banana,Centrality,3,3,2,0.6666666666666666
+Banana,Centrality,5,5,4,0.8
+Banana,Centrality,10,10,8,0.8
+Banana,Height,1,1,1,1.0
+Banana,Height,3,3,3,1.0
+Banana,Height,5,5,4,0.8
+Banana,Height,10,10,6,0.6
+Banana,Uprightness,1,1,1,1.0
+Banana,Uprightness,3,3,3,1.0
+Banana,Uprightness,5,5,5,1.0
+Banana,Uprightness,10,10,8,0.8
+Banana,Height+Centrality,1,1,1,1.0
+Banana,Height+Centrality,3,3,2,0.6666666666666666
+Banana,Height+Centrality,5,5,4,0.8
+Banana,Height+Centrality,10,10,8,0.8
+Power Drill,GFI,1,1,1,1.0
+Power Drill,GFI,3,3,3,1.0
+Power Drill,GFI,5,5,5,1.0
+Power Drill,GFI,10,10,10,1.0
+Power Drill,Centrality,1,1,1,1.0
+Power Drill,Centrality,3,3,3,1.0
+Power Drill,Centrality,5,5,5,1.0
+Power Drill,Centrality,10,10,10,1.0
+Power Drill,Height,1,1,1,1.0
+Power Drill,Height,3,3,3,1.0
+Power Drill,Height,5,5,5,1.0
+Power Drill,Height,10,10,9,0.9
+Power Drill,Uprightness,1,1,1,1.0
+Power Drill,Uprightness,3,3,3,1.0
+Power Drill,Uprightness,5,5,5,1.0
+Power Drill,Uprightness,10,10,10,1.0
+Power Drill,Height+Centrality,1,1,1,1.0
+Power Drill,Height+Centrality,3,3,3,1.0
+Power Drill,Height+Centrality,5,5,5,1.0
+Power Drill,Height+Centrality,10,10,10,1.0
+Mug,GFI,1,1,0,0.0
+Mug,GFI,3,3,1,0.3333333333333333
+Mug,GFI,5,5,2,0.4
+Mug,GFI,10,10,4,0.4
+Mug,Centrality,1,1,0,0.0
+Mug,Centrality,3,3,1,0.3333333333333333
+Mug,Centrality,5,5,3,0.6
+Mug,Centrality,10,10,8,0.8
+Mug,Height,1,1,1,1.0
+Mug,Height,3,3,2,0.6666666666666666
+Mug,Height,5,5,4,0.8
+Mug,Height,10,10,6,0.6
+Mug,Uprightness,1,1,1,1.0
+Mug,Uprightness,3,3,3,1.0
+Mug,Uprightness,5,5,3,0.6
+Mug,Uprightness,10,10,7,0.7
+Mug,Height+Centrality,1,1,1,1.0
+Mug,Height+Centrality,3,3,3,1.0
+Mug,Height+Centrality,5,5,4,0.8
+Mug,Height+Centrality,10,10,8,0.8
+Bowl,GFI,1,1,0,0.0
+Bowl,GFI,3,3,0,0.0
+Bowl,GFI,5,5,0,0.0
+Bowl,GFI,10,10,0,0.0
+Bowl,Centrality,1,1,0,0.0
+Bowl,Centrality,3,3,0,0.0
+Bowl,Centrality,5,5,0,0.0
+Bowl,Centrality,10,10,0,0.0
+Bowl,Height,1,1,0,0.0
+Bowl,Height,3,3,0,0.0
+Bowl,Height,5,5,0,0.0
+Bowl,Height,10,10,0,0.0
+Bowl,Uprightness,1,1,0,0.0
+Bowl,Uprightness,3,3,1,0.3333333333333333
+Bowl,Uprightness,5,5,1,0.2
+Bowl,Uprightness,10,10,2,0.2
+Bowl,Height+Centrality,1,1,0,0.0
+Bowl,Height+Centrality,3,3,0,0.0
+Bowl,Height+Centrality,5,5,0,0.0
+Bowl,Height+Centrality,10,10,0,0.0

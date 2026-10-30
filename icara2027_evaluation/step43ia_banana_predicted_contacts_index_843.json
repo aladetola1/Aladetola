@@ -1,0 +1,54 @@
+{
+  "experiment": "Panda Banana predicted contacts",
+  "archive_index": 843,
+  "original_results_sha256": "ace702e7e1a01a950085853d8e006db7f367b49e17b946f7d2c6d75761a8c579",
+  "diagnostic_result": {
+    "archive_index": 843,
+    "methods": "Centrality-only;Height+Centrality",
+    "status": "SUCCESS",
+    "success": true,
+    "geometric_candidates": 49,
+    "static_candidates_checked": 3,
+    "chosen_angle_deg": 60,
+    "chosen_width_mm": 17.5081,
+    "approach_proximity_frames": 0,
+    "approach_physical_object_frames": 0,
+    "approach_table_frames": 0,
+    "approach_self_collision_frames": 0,
+    "approach_max_object_motion_mm": 0.0048,
+    "approach_position_error_mm": 0.0135,
+    "minimum_object_gap_mm": 4.904,
+    "minimum_table_gap_mm": 11.0638,
+    "closure_bilateral_force_frames": 236,
+    "lift_bilateral_force_frames": 240,
+    "hold_bilateral_force_frames": 480,
+    "hold_table_frames": 0,
+    "minimum_hold_rise_mm": 74.3058,
+    "final_rise_mm": 82.249,
+    "maximum_translation_slip_mm": 9.935,
+    "maximum_rotation_slip_deg": 8.2141,
+    "failed_checks": "",
+    "error": "",
+    "predicted_contact_A_m": [
+      -0.05280610338523138,
+      0.06916857522977518,
+      0.23931321378083897
+    ],
+    "predicted_contact_B_m": [
+      -0.044052037900185526,
+      0.08433106142265967,
+      0.23931321378083892
+    ],
+    "predicted_normal_A": [
+      -0.5109189148192047,
+      -0.842423066275849,
+      -0.17112930750272676
+    ],
+    "predicted_normal_B": [
+      0.34888709837235715,
+      0.9291182789691097,
+      0.12254393609965725
+    ],
+    "predicted_contact_separation_mm": 17.508130970091695
+  }
+}

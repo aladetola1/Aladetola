@@ -97,7 +97,7 @@ If you use this repository in your research, please cite:
 
 > O. D. Aladetola *et al.*  
 > **From Stable Placement to Grasp-Aware Placement: A Robot-Independent Geometric Manipulation Proxy for Quality-Diversity Robotic Placement.**  
-> *(Manuscript currently under peer review.)*
+> *(Manuscript in preparation for ICARA 2027.)*
 
 A DOI and BibTeX entry will be added upon publication.
 
@@ -231,3 +231,106 @@ Each folder in `paper_runs/` has been renamed by object for clarity while preser
 # License
 
 This repository is distributed under the MIT License. See the `LICENSE` file for details.
+
+
+---
+
+## ICARA 2027 — Extended Experimental Evaluation
+
+This repository contains the extended experimental evaluation of the
+Robot-independent Geometric Manipulation Proxy (RGMP), developed as
+a geometric prioritization layer for Quality-Diversity robotic
+placement archives.
+
+The original PlaceIt CMA-MAE placement optimization is unchanged.
+RGMP ranks stable archived placements before downstream
+robot-specific grasp planning and execution.
+
+### Grasp Friendliness Index
+
+The fixed geometric ranking uses three dimensionless descriptors:
+
+- Height: H = z / L_H
+- Centrality: D = exp(-sqrt(x² + y²) / L_D)
+- Uprightness: U = exp(-sqrt(phi² + theta²) / theta_0)
+
+The ranking score is:
+
+GFI = 0.5 H + 0.3 D + 0.2 U
+
+Reference scales are L_H = 1 m, L_D = 0.1 m, and theta_0 = 1 rad.
+
+These coefficients are fixed engineering preferences rather than
+parameters learned from grasp outcomes.
+
+### Evaluation Summary
+
+**Placement archives:** 2,091 stable placements across six
+YCB objects: Mug, Bowl, Spoon, Banana, Plate, and Power Drill.
+
+**Franka Panda simulation:** 154 ranking-selected, deduplicated
+placements across five objects were independently evaluated.
+Of these, 101 completed dynamic grasping successfully.
+The evaluated population is not a random or independent
+held-out sample of the complete placement archives.
+
+**Matched-budget ranking evaluation:** At K = 10 evaluated
+placements per object (50 selections total):
+
+| Ranking | Successful selections |
+|---|---:|
+| Full GFI | 30/50 |
+| Centrality only | 35/50 |
+| Height only | 29/50 |
+| Uprightness only | 37/50 |
+| Height + Centrality | 35/50 |
+
+**Height-removal ablation:** Removing H from GFI preserves the
+same top-ten ordering in the five evaluated Panda object sets.
+The resulting centrality + uprightness ranking produces the
+same matched-budget selection outcomes as full GFI.
+
+**TIAGo physical experiments:** Across Mug, Bowl, and Spoon,
+60 placements and 600 grasp attempts were evaluated.
+GFI-ranked placement selection achieved 93% mean grasp
+success versus 42% for the tested distance-stratified random
+baseline, with a placement-level bootstrap difference interval
+of 35.0 to 66.7 percentage points.
+
+The TIAGo comparison does not demonstrate superiority over
+centrality-only or centrality + uprightness placement selection.
+
+### Reproducibility Materials
+
+The `icara2027_evaluation/` directory contains:
+
+- Panda evaluation scripts and per-placement outcomes.
+- Geometric ranking baseline comparisons.
+- GFI component ablation and sensitivity experiments.
+- Robustness and physics-based disturbance evaluations.
+- TIAGo experimental analysis records.
+- Matching-budget selection and runtime scripts.
+- Step 47 and Step 48 reproducibility verification outputs.
+- Supporting scientific figures.
+
+Reproduction instructions for the matched-budget and runtime
+analysis are available in:
+
+`icara2027_evaluation/reproducibility_step47/documentation/README.md`
+
+The principal numerical analyses have been checked against
+the archived data. This does not constitute independent
+reproduction of the complete grasp simulations or physical
+robot experiments from a clean installation.
+
+### Scope and Limitations
+
+RGMP is a geometric placement-prioritization heuristic, not a
+robot-independent grasp-success predictor. Its predictive
+discrimination is object-dependent, and competing geometric
+rankings sometimes achieve better selection performance.
+
+Downstream robot-specific feasibility, grasp planning,
+contact evaluation, and execution remain necessary.
+
+---

@@ -1,0 +1,2 @@
+rgmp_mean_percent,random_mean_percent,difference_percentage_points,ci_95_lower_pp,ci_95_upper_pp,bootstrap_replicates,random_seed,resampling_unit
+93.0,42.0,51.0,35.00000000000001,66.66666666666667,20000,2027,placement

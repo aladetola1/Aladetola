@@ -4,6 +4,11 @@ import shutil
 import numpy as np
 import matplotlib.pyplot as plt
 
+import matplotlib as mpl
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+
+
 RUNS = {
     "Mug": "results/mug/run87",
     "Bowl": "results/bowl/run89",

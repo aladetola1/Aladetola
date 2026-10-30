@@ -4,6 +4,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+import matplotlib as mpl
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+
+
 
 # Experimental grasp-success data
 

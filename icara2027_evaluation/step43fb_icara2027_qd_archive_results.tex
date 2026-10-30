@@ -1,0 +1,66 @@
+\subsection{Quality-Diversity Archive Analysis}
+\label{sec:qd_archive_analysis}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{/home/aladetola/qd_grasp/qd_grasp_6dof/placeit/clean_now/placeit_broken_version/icara2027_evaluation/step43ff_qd_successful_archive_growth.pdf}
+\caption{Growth in successful placement-archive cells for six objects under CMA-MAE at a fixed budget of 2160 evaluations. Archive success refers to the original placement criterion, not downstream robotic grasp success.}
+\label{fig:qd_successful_archive_growth}
+\end{figure*}
+
+
+The original placement-generation experiments used CMA-MAE with a six-dimensional discretized descriptor space comprising position $(x,y,z)$ and orientation $(\mathrm{roll},\mathrm{pitch},\mathrm{yaw})$. Each object was evaluated at checkpoints of 540, 1080, 1620, and 2160 evaluations. The original successful-cell counts and QD scores were extracted from the archived experiment data.
+
+Let $N_{\mathrm{cells}}$ denote the product of the six descriptor-grid dimensions, and let $N_{\mathrm{success}}$ denote the number of successful archive cells according to the original placement evaluation. The successful archive coverage is
+\begin{equation}
+C_{\mathrm{success}} = \frac{N_{\mathrm{success}}}{N_{\mathrm{cells}}}.
+\end{equation}
+The recorded successful-archive QD score uses a constant fitness shift of 10:
+\begin{equation}
+QD_{\mathrm{success}} = \sum_{i\in\mathcal{A}_{\mathrm{success}}}(f_i+10).
+\end{equation}
+Here, $f_i$ is the archived fitness of successful cell $i$. This score depends on both the number of successful cells and their shifted fitness contributions.
+
+\begin{table*}[t]
+\centering
+\caption{Final original CMA-MAE placement-archive metrics after 2160 evaluations per object. Successful archive cells refer to the original placement criterion, not downstream robot-grasp success.}
+\label{tab:qd_archive_results}
+\small
+\begin{tabular}{lrrrrr}
+\hline
+Object & Position bins per axis & Total grid cells & Successful cells & Coverage (\%) & QD score \\
+\hline
+Spoon & 60 & 216,000,000 & 389 & 0.0001801 & 3298.27 \\
+Banana & 60 & 216,000,000 & 213 & 0.0000986 & 1694.51 \\
+Power drill & 59 & 205,379,000 & 549 & 0.0002673 & 4513.79 \\
+Mug & 52 & 140,608,000 & 481 & 0.0003421 & 4065.44 \\
+Bowl & 56 & 175,616,000 & 217 & 0.0001236 & 1875.76 \\
+Plate & 66 & 287,496,000 & 242 & 0.0000842 & 2027.50 \\
+\hline
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+\centering
+\caption{Growth in successful placement-archive cells over the fixed CMA-MAE evaluation budget.}
+\label{tab:qd_archive_growth}
+\small
+\begin{tabular}{lrrrr}
+\hline
+Object & 540 & 1080 & 1620 & 2160 \\
+\hline
+Spoon & 86 & 188 & 287 & 389 \\
+Banana & 0 & 33 & 110 & 213 \\
+Power drill & 57 & 220 & 395 & 549 \\
+Mug & 54 & 162 & 321 & 481 \\
+Bowl & 18 & 52 & 122 & 217 \\
+Plate & 1 & 52 & 148 & 242 \\
+\hline
+\end{tabular}
+\end{table}
+
+All six objects showed nondecreasing successful-cell counts across the recorded checkpoints. Because the descriptor grids contain approximately $10^8$ possible cells, the resulting fractional coverage is small. The grid resolutions also differ across objects, so absolute coverage percentages are not directly equivalent measures of placement-generation difficulty.
+
+The plate is included in this archive analysis because original placement-generation data are available. It is excluded from the independent robot-grasp evaluation because no held-out plate grasp trials were performed. Archive success must not be interpreted as demonstrated robot-grasp success.
+
+These results characterize archive population and recorded fitness, not comparative superiority over other QD algorithms. Such an inference would require matched algorithmic baselines and evaluation budgets.

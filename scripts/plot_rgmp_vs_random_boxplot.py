@@ -3,6 +3,11 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
+import matplotlib as mpl
+mpl.rcParams['pdf.fonttype'] = 42
+mpl.rcParams['ps.fonttype'] = 42
+
+
 
 # ============================================================
 # Experimental grasp-success data across 10 placements
