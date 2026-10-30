@@ -1,0 +1,61 @@
+\section{Independent Simulated Grasp Evaluation}
+\label{sec:independent_grasp}
+
+\subsection{Experimental protocol}
+Five objects were evaluated using object-specific frozen grasp-planning protocols: spoon, banana, power drill, mug, and bowl. Development placements were excluded from the independent evaluations. For each held-out placement, the planner selected a grasp according to its predefined search and feasibility checks. Grasp execution was simulated using a Franka Panda manipulator in PyBullet.
+
+The evaluation considered approach feasibility, bilateral finger contact, lifting, retention, table separation, and relative object--gripper slip, subject to the criteria defined for each object. The success definitions were not fully identical across objects: notably, the bowl protocol measured cumulative slip from the end of finger closure through lifting and retention, whereas the banana, power drill, and mug protocols measured slip during retention relative to the end of lifting. The spoon protocol also used different contact and success checks. Consequently, object-level rates are presented separately.
+
+\subsection{Object-level results}
+\begin{table}[t]
+\centering
+\caption{Independent simulated grasp outcomes by object. These rates use object-specific protocols and are not intended as a pooled benchmark.}
+\label{tab:object_grasp_success}
+\begin{tabular}{@{\hspace{3pt}}l@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{5pt}}r@{\hspace{3pt}}}
+\hline
+Object & Successful & Evaluated & Success rate \\
+\hline
+Spoon & 22 & 24 & 91.67\% \\
+Banana & 21 & 29 & 72.41\% \\
+Power drill & 34 & 35 & 97.14\% \\
+Mug & 22 & 34 & 64.71\% \\
+Bowl & 2 & 32 & 6.25\% \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Comparison of placement-ranking methods}
+\begin{table*}[t]
+\centering
+\caption{Simulated grasp success within the placements selected by each ranking method. Numerators denote successful placements and denominators denote selected held-out placements. Selection sets may overlap.}
+\label{tab:ranking_grasp_comparison}
+\scriptsize
+\begin{tabular}{lccccc}
+\hline
+Object & GFI & Centrality & Height & Uprightness & Height+Centrality \\
+\hline
+Spoon & 6/7 (85.7\%) & 6/7 (85.7\%) & 7/8 (87.5\%) & 9/9 (100.0\%) & 6/7 (85.7\%) \\
+Banana & 6/9 (66.7\%) & 7/9 (77.8\%) & 6/10 (60.0\%) & 8/10 (80.0\%) & 7/9 (77.8\%) \\
+Power drill & 10/10 (100.0\%) & 10/10 (100.0\%) & 8/9 (88.9\%) & 10/10 (100.0\%) & 10/10 (100.0\%) \\
+Mug & 4/10 (40.0\%) & 7/9 (77.8\%) & 6/10 (60.0\%) & 7/10 (70.0\%) & 7/9 (77.8\%) \\
+Bowl & 0/10 (0.0\%) & 0/10 (0.0\%) & 0/10 (0.0\%) & 2/9 (22.2\%) & 0/10 (0.0\%) \\
+\hline
+\end{tabular}
+\end{table*}
+
+\subsection{Selection overlap and interpretation}
+For spoon, Centrality-only and Height+Centrality selected identical placement sets, so their matching results do not constitute independent evidence.
+For banana, Centrality-only and Height+Centrality selected identical placement sets, so their matching results do not constitute independent evidence.
+For bowl, Centrality-only and Height+Centrality selected identical placement sets, so their matching results do not constitute independent evidence.
+
+Across the evaluated objects, the GFI ranking did not consistently outperform the four baselines on downstream simulated grasp success. Several methods selected overlapping placements, and each placement had the same recorded outcome regardless of which ranking method selected it. The reported percentages are therefore descriptive comparisons of selection sets rather than estimates from independent randomized trials. They do not establish statistical superiority of a ranking method.
+
+\subsection{Failure analysis and limitations}
+The bowl exhibited especially limited performance under the fixed radial rim-grasp planner. Two of its 32 held-out placements succeeded. Thirteen had no statically feasible grasp within the predefined search and 17 failed during dynamic execution. Both successful placements were selected by the Uprightness-only ranking. These findings indicate a limitation of the tested planner and selection procedure, not a general impossibility of bowl grasping.
+
+The plate was investigated only during grasp-planner development. No suitable opposing-finger configuration was demonstrated within the tested searches. Its 30 held-out placements were not evaluated; consequently, no plate success rate is reported and the plate is excluded from the independent grasp comparison.
+
+The reported outcomes arise from simulated Panda executions rather than physical-robot experiments. Restricted grasp families, object-specific candidate generators, small method-selected sample sizes, selection overlap, and differences in success criteria limit generalization.
+
+\subsection{Implications for grasp-friendly placement}
+The experiments distinguish placement evaluation from downstream grasp execution. While quality-diversity methods can organize placements according to stability, diversity, and grasp-related attributes, the present independent execution results do not establish that GFI ranking consistently improves grasp success over the tested baselines. The relationship between placement descriptors and successful manipulation remains dependent on object geometry and grasp-planner capability.

@@ -1,0 +1,43 @@
+{
+  "experiment": "ICARA2027_plate_grasp_development",
+  "status": "development_concluded_no_independent_grasp_evaluation",
+  "object": "plate",
+  "development_indices": [
+    470
+  ],
+  "held_out_placements_not_evaluated": 30,
+  "robot": "Franka Panda with parallel-jaw gripper",
+  "simulation": "PyBullet",
+  "tested_approaches": [
+    "Horizontal radial edge approach",
+    "Tilted radial edge approach",
+    "Contact-normal diagnostic",
+    "Vertically aligned finger approach",
+    "Focused vertical pinch reachability screen"
+  ],
+  "final_development_screen": {
+    "step": "43EN",
+    "ik_poses_tested": 33,
+    "ik_valid_poses": 33,
+    "finger_opening_configurations": 231,
+    "vertical_body_table_clear_configurations": 104,
+    "near_bilateral_without_penetration": 0,
+    "closest_body_clear_configuration": {
+      "radial_angle_deg": 120,
+      "height_above_table_mm": 15,
+      "outward_offset_mm": 40,
+      "local_roll_deg": -60,
+      "finger_opening_mm": 5,
+      "finger_9_gap_mm": 7.6,
+      "finger_10_gap_mm": 8.23,
+      "table_clearance_mm": 1.29
+    }
+  },
+  "interpretation": "No feasible opposing-contact configuration was demonstrated within the tested development searches. This does not establish that the plate is physically ungraspable.",
+  "reporting_rules": {
+    "no_plate_success_rate_claim": true,
+    "do_not_count_held_out_as_failures": true,
+    "do_not_pool_with_five_completed_objects": true,
+    "do_not_modify_existing_independent_results": true
+  }
+}

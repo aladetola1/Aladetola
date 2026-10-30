@@ -1,0 +1,3 @@
+method,n_poses,mean_drift_mm,mean_rotation_deg,rotation_gt_5deg,rotation_gt_45deg,contact_retained
+GFI_Top10,10,1.2329,0.0147,0,0,10
+Random_Seed2027,10,19.2221,22.2919,4,2,10

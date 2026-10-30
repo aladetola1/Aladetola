@@ -1,0 +1,61 @@
+object,method,K,successes,evaluations,overlap_with_GFI
+banana,Full GFI,1,1,1,1
+banana,Centrality+Uprightness,1,1,1,1
+banana,Centrality,1,1,1,1
+banana,Full GFI,3,2,3,3
+banana,Centrality+Uprightness,3,2,3,3
+banana,Centrality,3,2,3,3
+banana,Full GFI,5,4,5,5
+banana,Centrality+Uprightness,5,4,5,5
+banana,Centrality,5,4,5,4
+banana,Full GFI,10,7,10,10
+banana,Centrality+Uprightness,10,7,10,10
+banana,Centrality,10,8,10,8
+bowl,Full GFI,1,0,1,1
+bowl,Centrality+Uprightness,1,0,1,1
+bowl,Centrality,1,0,1,1
+bowl,Full GFI,3,0,3,3
+bowl,Centrality+Uprightness,3,0,3,3
+bowl,Centrality,3,0,3,3
+bowl,Full GFI,5,0,5,5
+bowl,Centrality+Uprightness,5,0,5,5
+bowl,Centrality,5,0,5,5
+bowl,Full GFI,10,0,10,10
+bowl,Centrality+Uprightness,10,0,10,10
+bowl,Centrality,10,0,10,6
+mug,Full GFI,1,0,1,1
+mug,Centrality+Uprightness,1,0,1,1
+mug,Centrality,1,0,1,1
+mug,Full GFI,3,1,3,3
+mug,Centrality+Uprightness,3,1,3,3
+mug,Centrality,3,1,3,3
+mug,Full GFI,5,2,5,5
+mug,Centrality+Uprightness,5,2,5,5
+mug,Centrality,5,3,5,4
+mug,Full GFI,10,4,10,10
+mug,Centrality+Uprightness,10,4,10,10
+mug,Centrality,10,8,10,4
+power_drill,Full GFI,1,1,1,1
+power_drill,Centrality+Uprightness,1,1,1,1
+power_drill,Centrality,1,1,1,1
+power_drill,Full GFI,3,3,3,3
+power_drill,Centrality+Uprightness,3,3,3,3
+power_drill,Centrality,3,3,3,3
+power_drill,Full GFI,5,5,5,5
+power_drill,Centrality+Uprightness,5,5,5,5
+power_drill,Centrality,5,5,5,3
+power_drill,Full GFI,10,10,10,10
+power_drill,Centrality+Uprightness,10,10,10,10
+power_drill,Centrality,10,10,10,7
+spoon,Full GFI,1,1,1,1
+spoon,Centrality+Uprightness,1,1,1,1
+spoon,Centrality,1,1,1,1
+spoon,Full GFI,3,2,3,3
+spoon,Centrality+Uprightness,3,2,3,3
+spoon,Centrality,3,2,3,2
+spoon,Full GFI,5,4,5,5
+spoon,Centrality+Uprightness,5,4,5,5
+spoon,Centrality,5,4,5,3
+spoon,Full GFI,10,9,10,10
+spoon,Centrality+Uprightness,10,9,10,10
+spoon,Centrality,10,9,10,9
