@@ -1,0 +1,4 @@
+condition,success_rate,number_of_placements,attempts,successful_attempts
+Original GFI,90.0,10,100,90
+Central tilted,80.0,1,10,8
+Central upright,70.0,1,10,7

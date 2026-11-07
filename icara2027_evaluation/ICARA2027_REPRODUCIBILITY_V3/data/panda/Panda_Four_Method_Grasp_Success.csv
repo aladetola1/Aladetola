@@ -1,0 +1,17 @@
+object,method,successes,evaluated,missing,success_rate,source
+banana,Centrality-only,7,9,1,77.77777777777777,Retrospective Panda outcomes
+banana,Upright-filtered centrality,6,9,1,66.66666666666667,Matched GFI outcomes
+banana,GFI,6,9,1,66.66666666666667,Retrospective Panda outcomes
+banana,GFI + admissibility,9,10,0,90.0,Robot-specific assessment
+mug,Centrality-only,7,9,1,77.77777777777777,Retrospective Panda outcomes
+mug,Upright-filtered centrality,4,10,0,40.0,Matched GFI outcomes
+mug,GFI,4,10,0,40.0,Retrospective Panda outcomes
+mug,GFI + admissibility,9,10,0,90.0,Robot-specific assessment
+power_drill,Centrality-only,10,10,0,100.0,Retrospective Panda outcomes
+power_drill,Upright-filtered centrality,10,10,0,100.0,Matched GFI outcomes
+power_drill,GFI,10,10,0,100.0,Retrospective Panda outcomes
+power_drill,GFI + admissibility,10,10,0,100.0,Robot-specific assessment
+spoon,Centrality-only,6,7,3,85.71428571428571,Retrospective Panda outcomes
+spoon,Upright-filtered centrality,6,7,3,85.71428571428571,Matched GFI outcomes
+spoon,GFI,6,7,3,85.71428571428571,Retrospective Panda outcomes
+spoon,GFI + admissibility,9,10,0,90.0,Robot-specific assessment

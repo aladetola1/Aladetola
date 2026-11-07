@@ -1,0 +1,5 @@
+object,GFI_successes,Random_successes,attempts_per_method,GFI_rate,Random_rate
+Mug,90,36,100,90.0,36.0
+Bowl,96,47,100,96.0,47.0
+Spoon,93,43,100,93.0,43.0
+Overall,279,126,300,93.0,42.0

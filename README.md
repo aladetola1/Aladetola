@@ -9,6 +9,46 @@ Unlike conventional placement evaluation based solely on stability, RGMP provide
 
 ---
 
+## ICARA 2027 — Updated Reproducibility Package (V3)
+
+The latest ICARA 2027 evaluation investigates when
+geometric placement descriptors help, when they fail,
+and how robot-specific feasibility can refine
+placement selection.
+
+The updated experiments include:
+
+- Seven-method retrospective Franka Panda evaluation.
+- Four-object comparison of geometric ranking policies.
+- Retrospective robot-specific static admissibility.
+- Physical TIAGo GFI versus random-placement validation.
+- Additional physical Mug tilted/upright experiments.
+- Experimental CSVs, final figures, plotting scripts,
+  and frozen Panda configurations.
+
+**Main findings:**
+
+- Panda centrality-only: 35/40 successful selections (87.5%).
+- Panda original GFI: 30/40 (75%).
+- Panda GFI with retrospective admissibility: 37/40 (92.5%).
+- Equally screened centrality-only: 38/40 (95%).
+- Physical TIAGo GFI: 279/300 successful grasps (93%).
+- Physical TIAGo random baseline: 126/300 (42%).
+- Additional Mug trials: tilted 8/10; upright 7/10.
+
+The Panda admissibility analysis is retrospective,
+not a prospectively validated feasibility predictor.
+Physical Mug orientation results are based on individual
+placements and should not be interpreted as complete
+ranking-policy comparisons.
+
+**[Access the ICARA 2027 reproducibility V3 package](https://github.com/aladetola1/Aladetola/tree/code-cleaning/icara2027_evaluation/ICARA2027_REPRODUCIBILITY_V3)**
+
+The package README documents the experimental protocols,
+numerical results, source provenance, and limitations.
+
+---
+
 # 🎥 Demonstration Videos
 
 ## Top-10 RGMP/GFI Object Placements
