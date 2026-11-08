@@ -1,0 +1,29 @@
+method,K,successes,total,success_rate,selection_filter
+GFI + admissibility,1,4,4,100.0,static_feasible
+GFI + admissibility,3,10,12,83.33333333333333,static_feasible
+GFI + admissibility,5,18,20,90.0,static_feasible
+GFI + admissibility,10,37,40,92.5,static_feasible
+Centrality-only,1,3,4,75.0,none
+Centrality-only,3,8,12,66.66666666666667,none
+Centrality-only,5,16,20,80.0,none
+Centrality-only,10,35,40,87.5,none
+Height-only,1,4,4,100.0,none
+Height-only,3,11,12,91.66666666666667,none
+Height-only,5,17,20,85.0,none
+Height-only,10,29,40,72.5,none
+Uprightness-only,1,4,4,100.0,none
+Uprightness-only,3,12,12,100.0,none
+Uprightness-only,5,18,20,90.0,none
+Uprightness-only,10,35,40,87.5,none
+Height + Centrality,1,4,4,100.0,none
+Height + Centrality,3,11,12,91.66666666666667,none
+Height + Centrality,5,17,20,85.0,none
+Height + Centrality,10,35,40,87.5,none
+Centrality + Uprightness,1,3,4,75.0,upright_eligible
+Centrality + Uprightness,3,8,12,66.66666666666667,upright_eligible
+Centrality + Uprightness,5,15,20,75.0,upright_eligible
+Centrality + Uprightness,10,30,40,75.0,upright_eligible
+Original GFI,1,3,4,75.0,none
+Original GFI,3,8,12,66.66666666666667,none
+Original GFI,5,15,20,75.0,none
+Original GFI,10,30,40,75.0,none

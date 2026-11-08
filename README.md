@@ -1,3 +1,40 @@
+<!-- ICARA2027-V4-START -->
+## ICARA 2027 — Geometric Descriptor Characterization
+
+**Robot-Model-Independent Geometric Descriptor Characterization
+for Grasp-Oriented Placement Prioritization**
+
+This research introduces RGMP as a lightweight, post-optimization
+interface for characterizing geometric placement descriptors.
+
+Rather than claiming universal superiority of GFI, the study
+investigates height, centrality, uprightness, their interactions,
+and their limitations for downstream robotic grasping.
+
+The experimental validation includes:
+
+- Six YCB objects for geometric characterization.
+- 154 previously evaluated Franka Panda placements.
+- Matched-budget geometric ranking comparisons.
+- Retrospective robot-specific static-admissibility analysis.
+- Physical TIAGo grasp experiments.
+- Additional tilted and upright Mug investigations.
+
+**Physical TIAGo:** GFI 93% versus stratified-random 42%.
+
+**Panda:** Original GFI 75% versus retrospectively
+admissibility-screened GFI 92.5% at K=10.
+
+The admissibility result is retrospective, not prospective
+grasp-feasibility prediction.
+
+[ICARA 2027 Reproducibility V4](
+icara2027_evaluation/ICARA2027_REPRODUCIBILITY_V4/README.md)
+
+<!-- ICARA2027-V4-END -->
+
+---
+
 # From Stable Placement to Grasp-Aware Placement:
 ## A Robot-Independent Geometric Manipulation Proxy for Quality-Diversity Robotic Placement
 
