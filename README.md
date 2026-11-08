@@ -105,7 +105,7 @@ The following video presents the experimental validation of the proposed RGMP/GF
 https://github.com/user-attachments/assets/a64c5833-48e1-4701-ad67-7c8073ca6117
 
 📹 **Open or download the experimental video:**  
-[hardware_validation_bowl.mp4](https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113)
+[Watch Mug validation](https://github.com/user-attachments/assets/a64c5833-48e1-4701-ad67-7c8073ca6117)
 
 ## Experimental Hardware Validation – Bowl
 
@@ -114,7 +114,7 @@ The following video demonstrates the generalization capability of the proposed R
 https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113
 
 📹 **Open or download the experimental video:**  
-[hardware_validation_bowl.mp4](https://github.com/user-attachments/assets/d10bd57a-4d72-4998-ae93-7d5c3644a8ae)
+[Watch Bowl validation](https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113)
 
 ## Experimental Hardware Validation – Spoon
 
@@ -123,7 +123,7 @@ The following video demonstrates the applicability of the proposed RGMP/GFI fram
 https://github.com/user-attachments/assets/b3a63d64-6557-4c8e-af08-652459d04d25
  
 📹 **Open or download the experimental video:**  
-[hardware_validation_spoon.mp4](https://github.com/user-attachments/assets/e9a2d71f-0dc5-4040-aea5-3ee4380f303b)
+[Watch Spoon validation](https://github.com/user-attachments/assets/b3a63d64-6557-4c8e-af08-652459d04d25)
 
 
 > **Note:** The hardware experiments use the 6-DoF object poses exported by the proposed RGMP framework, demonstrating successful transfer from simulation to real-world robotic manipulation.
