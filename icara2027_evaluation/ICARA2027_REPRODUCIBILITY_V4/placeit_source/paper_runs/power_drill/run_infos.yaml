@@ -1,0 +1,32 @@
+Number of triggered outcome cells (outcome_archive len, out of 205379000): 1181
+Number of successful individuals (outcome_archive get_n_successful_cells): 549
+Number of evaluations (progression_monitoring.n_eval): 2160
+elapsed_time:
+  run_qd: 2 hours, 8 minutes, 24 seconds
+Number of computed generations (gen): 4
+outcome_archive_dims:
+  max_z: 0.300239501029253
+  max_y: 0.2755820019841194
+  max_x: 0.28792050245404244
+  min_z: -0.2953575006425381
+  min_y: -0.32001499968767166
+  min_x: -0.30767649921774864
+  n_bins_z: 59.0
+  n_bins_y: 59.0
+  n_bins_x: 59.0
+  len_bin_z: 0.010094864435115104
+  len_bin_y: 0.010094864435115104
+  len_bin_x: 0.010094864435115104
+  max_roll: 6.283185307179586
+  max_pitch: 6.283185307179586
+  max_yaw: 6.283185307179586
+  min_roll: 0.0
+  min_pitch: 0.0
+  min_yaw: 0.0
+  n_bins_roll: 10.0
+  n_bins_pitch: 10.0
+  n_bins_yaw: 10.0
+  len_bin_roll: 0.6283185307179586
+  len_bin_pitch: 0.6283185307179586
+  len_bin_yaw: 0.6283185307179586
+is running timeout: false

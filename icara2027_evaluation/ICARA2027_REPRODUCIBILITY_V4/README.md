@@ -168,3 +168,29 @@ robot-specific feasibility assessment remains necessary.
 
 RGMP complements PLACE IT and downstream grasp planning.
 It does not replace either framework.
+
+## Source-code provenance and manuscript version
+
+The `placeit_source/` directory preserves the modified
+PLACE IT implementation used for RGMP development.
+
+Its original README may contain earlier manuscript titles
+and development descriptions.
+
+The authoritative ICARA 2027 manuscript is:
+
+Robot-Model-Independent Geometric Descriptor
+Characterization for Grasp-Oriented Placement
+Prioritization.
+
+The current paper characterizes geometric descriptors,
+their limitations, and their interaction with downstream
+robot-specific grasp evaluation.
+
+The original PLACE IT optimization fitness is preserved.
+GFI is calculated separately as an additional geometric
+placement score.
+
+The `algorithms_research/` directory contains the
+experimental implementations supporting this
+descriptor-characterization study.
