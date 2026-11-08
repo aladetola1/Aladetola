@@ -194,3 +194,55 @@ placement score.
 The `algorithms_research/` directory contains the
 experimental implementations supporting this
 descriptor-characterization study.
+
+---
+
+## Experimental Demonstration Videos
+
+The following videos illustrate the geometric placement
+prioritization workflow and physical TIAGo grasp execution.
+
+These demonstrations complement the quantitative experiments
+reported in the ICARA 2027 manuscript.
+
+### 1. Top-10 RGMP/GFI Placements — YCB Mug
+
+Visualization of the ten highest-ranked GFI placement
+configurations for the Mug.
+
+https://github.com/user-attachments/assets/8763c6b4-1c20-4fbb-9681-c4f281cabfa5
+
+[View placement demonstration](https://github.com/user-attachments/assets/8763c6b4-1c20-4fbb-9681-c4f281cabfa5)
+
+### 2. Physical TIAGo Validation — Mug
+
+Demonstration of a TIAGo grasp execution from a selected
+GFI-ranked Mug placement.
+
+https://github.com/user-attachments/assets/a64c5833-48e1-4701-ad67-7c8073ca6117
+
+### 3. Physical TIAGo Validation — Bowl
+
+Demonstration of a TIAGo grasp execution from a selected
+GFI-ranked Bowl placement.
+
+https://github.com/user-attachments/assets/f91022d7-ba3b-435f-ad70-7bbfd360e113
+
+### 4. Physical TIAGo Validation — Spoon
+
+Demonstration of a TIAGo grasp execution from a selected
+GFI-ranked Spoon placement.
+
+https://github.com/user-attachments/assets/b3a63d64-6557-4c8e-af08-652459d04d25
+
+### Scientific interpretation
+
+These videos illustrate representative experimental
+executions rather than complete statistical evaluations.
+
+The quantitative TIAGo evaluation includes 300 grasp
+attempts for GFI-ranked placements and 300 attempts
+for the stratified-random stable-placement baseline.
+
+The physical experiments do not establish universal
+superiority over alternative geometric ranking methods.
